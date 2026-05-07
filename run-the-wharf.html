@@ -27,7 +27,6 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html, body { height: 100%; }
-  html { scroll-behavior: smooth; }
 
   body {
     background: var(--ink);
@@ -352,17 +351,13 @@
     gap: 16px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x proximity;
     overscroll-behavior-x: contain;
-    scroll-behavior: smooth;
     scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
   }
   .gallery-track::-webkit-scrollbar { display: none; }
 
   .gallery-slide {
     flex: 0 0 auto;
-    scroll-snap-align: start;
     height: clamp(360px, 60vh, 600px);
     background: rgba(244, 241, 234, 0.04);
     border: 1px solid rgba(244, 241, 234, 0.1);
@@ -688,6 +683,16 @@
         const w = slides[0].getBoundingClientRect().width + 16;
         track.scrollBy({ left: dir * w, behavior: 'smooth' });
       });
+    });
+  })();
+
+  (() => {
+    const link = document.querySelector('a[href="#lock-it-in"]');
+    const target = document.getElementById('lock-it-in');
+    if (!link || !target) return;
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   })();
 
