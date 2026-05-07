@@ -26,7 +26,6 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body { height: 100%; }
 
   body {
     background: var(--ink);
@@ -74,7 +73,6 @@
     padding: 64px 40px 32px;
     position: relative;
     overflow: hidden;
-    min-height: calc(100vh - 70px);
   }
   @media (max-width: 720px) { .event { padding: 48px 24px 28px; } }
 
@@ -203,6 +201,19 @@
     letter-spacing: -0.01em;
     text-transform: uppercase;
     color: var(--bone);
+  }
+  .event-cell-times {
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bone);
+    opacity: 0.65;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .event-quote {
@@ -561,7 +572,10 @@
     </div>
 
     <p class="event-tag">
-      This September, we're rolling into Canary Wharf as a squad. Run The Wharf is the UK's biggest closed-road night race 5K. 5,000 runners. Canary Wharf shut down for a one-night-only festival and race on London's closed roads. The perfect place to beat the boys.
+      Beat The Boys has partnered with award-winning Friday Night Lights and their Run The Wharf to bring an all-female team led by Mary to the start line this September — Canary Wharf as a squad.
+    </p>
+    <p class="event-tag">
+      Run The Wharf is the UK's biggest closed-road 5K night race. 5,000 runners. London's roads shut down for a one-night-only festival and race after dark. The perfect place to beat the boys.
     </p>
 
     <div class="event-grid">
@@ -576,12 +590,32 @@
       <div class="event-cell">
         <span class="event-cell-label">— When</span>
         <span class="event-cell-value">After Dark</span>
+        <div class="event-cell-times">
+          <span>18:00 — Doors</span>
+          <span>19:30 — Race</span>
+          <span>23:00 — Close</span>
+        </div>
       </div>
       <div class="event-cell">
         <span class="event-cell-label">— Location</span>
         <span class="event-cell-value">Canary Wharf</span>
       </div>
     </div>
+
+    <p class="event-quote">The first all-female Beat The Boys team this September.</p>
+
+    <div class="event-subhead">What you get when you join the squad</div>
+
+    <ol class="event-list">
+      <li>Your spot in the Beat The Boys team at Run The Wharf, Thursday 3 September 2026.</li>
+      <li>Closed-road 5K through Canary Wharf after dark.</li>
+      <li>Discounted entry to Run The Wharf.</li>
+      <li>Custom BTB race bibs.</li>
+      <li>20 gifted pairs of socks to lucky winners.</li>
+      <li>We'll let you know how many boys you beat in your results.</li>
+      <li>Post-race party.</li>
+      <li>One night to put the boys behind you. Loudly.</li>
+    </ol>
 
     <section class="gallery" aria-label="Run The Wharf race photos">
       <div class="gallery-track" id="gallery-track">
@@ -610,21 +644,6 @@
         <div class="gallery-counter" id="gallery-counter">01 <span class="total">/ 06</span></div>
       </div>
     </section>
-
-    <p class="event-quote">"We're going as Beat The Boys."</p>
-
-    <div class="event-subhead">What you get when you join the squad</div>
-
-    <ol class="event-list">
-      <li>Your spot in the Beat The Boys team at Run The Wharf, Thursday 3 September 2026.</li>
-      <li>Closed-road 5K through Canary Wharf after dark.</li>
-      <li>Discounted entry to Run The Wharf.</li>
-      <li>Custom BTB race bibs.</li>
-      <li>20 gifted pairs of socks to lucky winners.</li>
-      <li>We'll let you know how many boys you beat in your results.</li>
-      <li>Post-race party.</li>
-      <li>One night to put the boys behind you. Loudly.</li>
-    </ol>
 
     <div class="wharf-signup" id="lock-it-in">
       <div class="wharf-signup-eyebrow">Join the squad</div>
