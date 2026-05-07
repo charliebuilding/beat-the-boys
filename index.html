@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Beat The Boys</title>
+<meta name="description" content="A global race series for women who came to race. Coming 2026." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500&family=Permanent+Marker&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --rust: #FF3D23;
+    --ink: #0A0A0A;
+    --bone: #F4F1EA;
+    --neon: #FF2D87;
+    --grey: #6A6A6A;
+
+    --display: 'Archivo Black', 'Helvetica Neue', sans-serif;
+    --body: 'Archivo', system-ui, sans-serif;
+    --marker: 'Permanent Marker', cursive;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--ink);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--ink); color: var(--rust); }
+
+  .stage {
+    min-height: 100svh;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: minmax(58vh, auto) 1fr;
+    position: relative;
+  }
+
+  /* ============ TOP ZONE (RED) ============ */
+  .top {
+    background: var(--rust);
+    padding: 28px 40px 40px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) { .top { padding: 24px; } }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+  }
+  .topbar a { color: inherit; text-decoration: none; transition: opacity .2s; }
+  .topbar a:hover { opacity: 0.6; }
+  .topbar-logo {
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 0 0;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: fade .8s .15s ease forwards;
+  }
+  .eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--ink);
+  }
+
+  .title {
+    font-family: var(--display);
+    font-size: clamp(64px, 13vw, 200px);
+    line-height: 0.85;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .title .line {
+    display: block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp .9s ease forwards;
+  }
+  .title .line:nth-child(1) { animation-delay: .25s; }
+  .title .line:nth-child(2) { animation-delay: .4s; }
+
+  .scrawl {
+    position: absolute;
+    top: 6%; right: 2%;
+    font-family: var(--marker);
+    color: var(--neon);
+    text-transform: uppercase;
+    pointer-events: none;
+    line-height: 0.95;
+    font-size: clamp(20px, 2.6vw, 34px);
+    transform: rotate(-8deg);
+    text-align: center;
+    max-width: 220px;
+    opacity: 0;
+    animation: fade 1s .9s ease forwards;
+  }
+  @media (max-width: 720px) {
+    .scrawl { font-size: 16px; max-width: 130px; top: 4%; right: 6%; }
+  }
+
+  .tag {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: clamp(14px, 1.4vw, 17px);
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 480px;
+    opacity: 0;
+    animation: fadeUp .8s .55s ease forwards;
+  }
+
+  /* ============ BOTTOM ZONE (BLACK with RED accent) ============ */
+  .bottom {
+    background: var(--ink);
+    color: var(--rust);
+    padding: 36px 40px 28px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) { .bottom { padding: 32px 24px 24px; } }
+
+  /* Subtle radial neon glow in the corner */
+  .bottom::before {
+    content: '';
+    position: absolute;
+    bottom: -30%; right: -10%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, var(--neon) 0%, transparent 65%);
+    opacity: 0.18;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .bottom-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    position: relative; z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  @media (max-width: 800px) {
+    .bottom-inner { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  .pitch {
+    font-family: var(--display);
+    font-size: clamp(28px, 4.2vw, 56px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--rust);
+  }
+  .pitch .small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bone);
+    opacity: 0.6;
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+
+  .signup {
+    width: 100%;
+    opacity: 0;
+    animation: fadeUp .8s .8s ease forwards;
+  }
+
+  .signup-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--bone);
+    margin-bottom: 12px;
+    display: block;
+    opacity: 0.7;
+  }
+
+  .form {
+    display: flex;
+    border: 1.5px solid var(--rust);
+    background: transparent;
+    transition: box-shadow .25s ease, border-color .25s ease;
+  }
+  .form:focus-within {
+    border-color: var(--bone);
+    box-shadow: 4px 4px 0 var(--rust);
+  }
+  .form input {
+    flex: 1;
+    border: 0;
+    padding: 16px 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    background: transparent;
+    color: var(--bone);
+    outline: none;
+    letter-spacing: 0.04em;
+  }
+  .form input::placeholder { color: var(--rust); opacity: 0.7; }
+  .form button {
+    border: 0;
+    border-left: 1.5px solid var(--rust);
+    background: var(--rust);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0 26px;
+    cursor: pointer;
+    transition: background .25s ease, color .25s ease;
+  }
+  .form button:hover { background: var(--bone); color: var(--ink); }
+
+  .fineprint {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+    opacity: 0.4;
+  }
+
+  /* Bottom strip — meta line */
+  .bottombar {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 61, 35, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+    opacity: 0.7;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative; z-index: 2;
+  }
+  .bottombar .num {
+    font-family: var(--display);
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--rust);
+    opacity: 1;
+  }
+  .bottombar .right {
+    display: flex; gap: 16px; align-items: end;
+  }
+
+  @keyframes fade { to { opacity: 1; } }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- ========== TOP : RED ZONE ========== -->
+  <section class="top">
+    <header class="topbar">
+      <div class="topbar-logo">Beat The Boys</div>
+      <a href="https://instagram.com/marymccarths" target="_blank" rel="noopener">@marymccarths ↗</a>
+    </header>
+
+    <div class="hero">
+      <div class="eyebrow">A Global Race Series &nbsp;·&nbsp; Coming 2026</div>
+
+      <h1 class="title">
+        <span class="line">Beat</span>
+        <span class="line">The Boys.</span>
+      </h1>
+
+      <p class="tag">
+        Built for women who came to race. A global series for the front of the pack — train hard, race honest, beat more boys than last time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== BOTTOM : BLACK + RED ZONE ========== -->
+  <section class="bottom">
+    <div class="bottom-inner">
+
+      <div class="pitch">
+        <span class="small">— First in. Front of the pack.</span>
+        Sign up.<br />Show up.<br />Finish first.
+      </div>
+
+      <div class="signup">
+        <span class="signup-label">Get on the list</span>
+        <div class="form">
+          <input type="email" placeholder="your.email@anywhere.com" aria-label="Email" />
+          <button type="button">Sign me up →</button>
+        </div>
+        <div class="fineprint">No spam. No filler. Occasional emails only.</div>
+      </div>
+
+    </div>
+
+    <div class="bottombar">
+      <div>© Beat The Boys 2026</div>
+      <div class="right">
+        <span>#beattheboys</span>
+        <span class="num">01</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const form = document.querySelector('.form');
+  const input = form.querySelector('input');
+  const btn = form.querySelector('button');
+  btn.addEventListener('click', () => {
+    if (input.value && input.value.includes('@')) {
+      btn.textContent = "You're in ✓";
+      btn.style.background = 'var(--neon)';
+      btn.style.color = 'var(--bone)';
+      input.value = '';
+      input.placeholder = 'see you at the start line';
+      input.disabled = true;
+    } else {
+      input.focus();
+      form.animate(
+        [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
+        { duration: 250 }
+      );
+    }
+  });
+</script>
+
+</body>
+</html>
