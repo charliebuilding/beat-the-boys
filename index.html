@@ -165,8 +165,28 @@
     color: var(--ink);
     max-width: 560px;
     opacity: 0;
-    animation: fadeUp .8s .55s ease forwards;
+    animation: fadeUp .8s .65s ease forwards;
   }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 26px;
+    background: var(--ink);
+    color: var(--rust);
+    font-family: var(--display);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    margin-bottom: 28px;
+    align-self: flex-start;
+    transition: background .25s ease, color .25s ease, transform .25s ease;
+    opacity: 0;
+    animation: fadeUp .8s .5s ease forwards;
+  }
+  .hero-cta:hover { background: var(--bone); color: var(--ink); transform: translateX(3px); }
 
   /* ============ BOTTOM ZONE (BLACK with RED accent) ============ */
   .bottom {
@@ -353,6 +373,8 @@
         <span class="line">Beat</span>
         <span class="line">The Boys.</span>
       </h1>
+
+      <a href="run-the-wharf.html" class="hero-cta">Race 1 — London →</a>
 
       <p class="tag">
         Built for women who came to race. Train hard, race honest, beat more boys than last time.
