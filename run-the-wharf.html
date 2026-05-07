@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Beat The Boys × Run The Wharf — Race 01</title>
+<title>Beat The Boys × Run The Wharf · Race 01</title>
 <meta name="description" content="Beat the boys. Take the Wharf. Thursday 3 September 2026, Canary Wharf." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -254,6 +254,25 @@
     letter-spacing: -0.02em;
     text-transform: uppercase;
   }
+
+  .event-signoff {
+    font-family: var(--marker);
+    color: var(--neon);
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.1;
+    margin: -48px 0 72px;
+    transform: rotate(-3deg);
+    transform-origin: left center;
+    max-width: 540px;
+    letter-spacing: 0.01em;
+  }
+  .event-signoff-name {
+    display: block;
+    font-size: clamp(34px, 4.4vw, 56px);
+    margin-top: 14px;
+    transform: rotate(-1deg);
+  }
+  @media (max-width: 720px) { .event-signoff { margin: -32px 0 56px; } }
 
   .event-subhead {
     font-family: var(--mono);
@@ -620,7 +639,7 @@
     </h2>
 
     <div class="event-credit">
-      <span class="event-credit-label">— With</span>
+      <span class="event-credit-label">With</span>
       <img src="images/FNL_Linear_Colour_Light.png" alt="Friday Night Lights" />
     </div>
 
@@ -630,7 +649,7 @@
 
     <div class="event-tags">
       <p class="event-tag">
-        Beat The Boys has partnered with award-winning Friday Night Lights and their Run The Wharf to bring an all-female team led by Mary to the start line this September — Canary Wharf as a squad.
+        Beat The Boys has partnered with award-winning Friday Night Lights and their Run The Wharf to bring an all-female team led by Mary to the start line this September. Canary Wharf as a squad.
       </p>
       <p class="event-tag">
         Run The Wharf is the UK's biggest closed-road 5K night race. 5,000 runners. London's roads shut down for a one-night-only festival and race after dark. The perfect place to beat the boys.
@@ -639,35 +658,40 @@
 
     <div class="event-grid">
       <div class="event-cell">
-        <span class="event-cell-label">— Date</span>
+        <span class="event-cell-label">Date</span>
         <span class="event-cell-value">Thu 03.09.26</span>
       </div>
       <div class="event-cell">
-        <span class="event-cell-label">— Distance</span>
+        <span class="event-cell-label">Distance</span>
         <span class="event-cell-value">5K</span>
       </div>
       <div class="event-cell">
-        <span class="event-cell-label">— When</span>
+        <span class="event-cell-label">When</span>
         <span class="event-cell-value">After Dark</span>
         <div class="event-cell-times">
-          <span>18:00 — Event Opens</span>
-          <span>19:30 — Race</span>
-          <span>23:00 — Festival Closes</span>
+          <span>18:00 · Event Opens</span>
+          <span>19:30 · Race</span>
+          <span>23:00 · Festival Closes</span>
         </div>
       </div>
       <div class="event-cell">
-        <span class="event-cell-label">— Location</span>
+        <span class="event-cell-label">Location</span>
         <span class="event-cell-value">Canary Wharf</span>
       </div>
     </div>
 
     <p class="event-quote">The first all-female<br />Beat The Boys<br />team this September.</p>
 
+    <div class="event-signoff">
+      See you at the start line,
+      <span class="event-signoff-name">Mary McCarths</span>
+    </div>
+
     <div class="wharf-signup" id="lock-it-in">
       <div class="wharf-signup-eyebrow">Join the squad</div>
       <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
       <p class="wharf-signup-tag">
-        Drop your email — we'll send you the exclusive ticket link when our Beat The Boys tickets drop!
+        Drop your email. We'll send you the exclusive ticket link when our Beat The Boys tickets drop.
       </p>
       <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="wharf-signup" />
@@ -723,7 +747,7 @@
       <div class="wharf-signup-eyebrow">Join the squad</div>
       <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
       <p class="wharf-signup-tag">
-        Drop your email — we'll send you the exclusive ticket link when our Beat The Boys tickets drop!
+        Drop your email. We'll send you the exclusive ticket link when our Beat The Boys tickets drop.
       </p>
       <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="wharf-signup" />
