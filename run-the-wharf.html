@@ -258,21 +258,25 @@
   .event-signoff {
     font-family: var(--marker);
     color: var(--neon);
-    font-size: clamp(20px, 2.4vw, 30px);
-    line-height: 1.1;
-    margin: -48px 0 72px;
+    font-size: clamp(14px, 1.6vw, 20px);
+    line-height: 1.15;
+    margin: 48px 0 48px;
     transform: rotate(-3deg);
     transform-origin: left center;
-    max-width: 540px;
+    max-width: 420px;
     letter-spacing: 0.01em;
   }
   .event-signoff-name {
     display: block;
-    font-size: clamp(34px, 4.4vw, 56px);
-    margin-top: 14px;
+    font-size: clamp(22px, 2.6vw, 32px);
+    margin-top: 8px;
     transform: rotate(-1deg);
   }
-  @media (max-width: 720px) { .event-signoff { margin: -32px 0 56px; } }
+  .event-signoff-x {
+    display: inline-block;
+    margin-left: 8px;
+    transform: rotate(8deg);
+  }
 
   .event-subhead {
     font-family: var(--mono);
@@ -684,7 +688,7 @@
 
     <div class="event-signoff">
       See you at the start line,
-      <span class="event-signoff-name">Mary McCarths</span>
+      <span class="event-signoff-name">Mary McCarths<span class="event-signoff-x">x</span></span>
     </div>
 
     <div class="wharf-signup" id="lock-it-in">
