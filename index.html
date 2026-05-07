@@ -189,39 +189,26 @@
   .hero-cta:hover { background: var(--bone); color: var(--ink); transform: translateX(3px); }
 
   .hero-signoff {
-    position: absolute;
-    right: 4%;
-    bottom: 8%;
     font-family: var(--marker);
-    color: var(--neon);
-    font-size: clamp(13px, 1.4vw, 18px);
-    line-height: 1.15;
-    text-align: right;
-    transform: rotate(-6deg);
-    transform-origin: right center;
-    max-width: 280px;
-    pointer-events: none;
+    color: var(--ink);
+    font-size: clamp(30px, 4.4vw, 60px);
+    line-height: 1;
+    margin: -8px 0 28px;
+    align-self: flex-start;
+    transform: rotate(-3deg);
+    transform-origin: left center;
     opacity: 0;
-    animation: fade 1s 1.1s ease forwards;
-  }
-  .hero-signoff-name {
-    display: block;
-    font-size: clamp(20px, 2.4vw, 30px);
-    margin-top: 6px;
-    transform: rotate(-2deg);
+    animation: fadeUp .8s .7s ease forwards;
+    pointer-events: none;
   }
   .hero-signoff-x {
     display: inline-block;
-    margin-left: 8px;
-    transform: rotate(8deg);
+    margin-left: 14px;
+    font-size: 1.1em;
+    transform: rotate(10deg);
   }
   @media (max-width: 720px) {
-    .hero-signoff {
-      right: 6%; bottom: 4%;
-      max-width: 180px;
-      font-size: 12px;
-    }
-    .hero-signoff-name { font-size: 18px; }
+    .hero-signoff { font-size: 26px; margin: -4px 0 22px; }
   }
 
   /* ============ BOTTOM ZONE (BLACK with RED accent) ============ */
@@ -410,16 +397,15 @@
         <span class="line">The Boys.</span>
       </h1>
 
+      <div class="hero-signoff">
+        Mary McCarths<span class="hero-signoff-x">x</span>
+      </div>
+
       <a href="run-the-wharf.html" class="hero-cta">Race 1 · London →</a>
 
       <p class="tag">
         Built for women who came to race. Train hard, race honest. Beat more boys than last time.
       </p>
-
-      <div class="hero-signoff">
-        See you at the start line,
-        <span class="hero-signoff-name">Mary McCarths<span class="hero-signoff-x">x</span></span>
-      </div>
     </div>
   </section>
 

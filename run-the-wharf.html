@@ -145,6 +145,29 @@
     height: clamp(18px, 2.2vw, 28px);
     max-width: 70%;
   }
+  .event-credit-ig {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+    text-decoration: none;
+    padding: 9px 16px;
+    border: 1px solid rgba(244, 241, 234, 0.3);
+    margin-left: auto;
+    transition: background .2s, color .2s, border-color .2s;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .event-credit-ig:hover {
+    background: var(--bone);
+    color: var(--ink);
+    border-color: var(--bone);
+  }
+  @media (max-width: 720px) {
+    .event-credit { flex-wrap: wrap; }
+    .event-credit-ig { margin-left: 0; margin-top: 8px; }
+  }
 
   .event-tag {
     font-family: var(--body);
@@ -645,6 +668,22 @@
     <div class="event-credit">
       <span class="event-credit-label">With</span>
       <img src="images/FNL_Linear_Colour_Light.png" alt="Friday Night Lights" />
+      <a class="event-credit-ig" href="https://www.instagram.com/fridaynightlights.run/" target="_blank" rel="noopener">Follow @fridaynightlights ↗</a>
+    </div>
+
+    <div class="wharf-signup wharf-signup--secondary">
+      <div class="wharf-signup-eyebrow">Join the squad</div>
+      <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
+      <p class="wharf-signup-tag">
+        Drop your email. We'll send you the exclusive ticket link when our Beat The Boys tickets drop.
+      </p>
+      <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="wharf-signup" />
+        <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
+        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" required />
+        <button type="submit">Join the squad →</button>
+      </form>
+      <div class="wharf-fineprint">No spam. Race-day briefings only.</div>
     </div>
 
     <div class="event-tags">
@@ -667,7 +706,7 @@
       </div>
       <div class="event-cell">
         <span class="event-cell-label">When</span>
-        <span class="event-cell-value">After Dark</span>
+        <span class="event-cell-value">Dusk to Dark</span>
         <div class="event-cell-times">
           <span>18:00 · Event Opens</span>
           <span>19:30 · Race</span>
@@ -687,6 +726,19 @@
       <span class="event-signoff-name">Mary McCarths<span class="event-signoff-x">x</span></span>
     </div>
 
+    <div class="event-subhead">What you get when you join the squad</div>
+
+    <ol class="event-list">
+      <li>Your spot in the Beat The Boys team at Run The Wharf, Thursday 3 September 2026.</li>
+      <li>Closed-road 5K through Canary Wharf after dark.</li>
+      <li>Discounted entry to Run The Wharf.</li>
+      <li>Custom BTB race bibs.</li>
+      <li>20 gifted pairs of socks to lucky winners.</li>
+      <li>We'll let you know how many boys you beat in your results.</li>
+      <li>Post-race party.</li>
+      <li>One night to put the boys behind you. Loudly.</li>
+    </ol>
+
     <div class="wharf-signup" id="lock-it-in">
       <div class="wharf-signup-eyebrow">Join the squad</div>
       <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
@@ -701,19 +753,6 @@
       </form>
       <div class="wharf-fineprint">No spam. Race-day briefings only.</div>
     </div>
-
-    <div class="event-subhead">What you get when you join the squad</div>
-
-    <ol class="event-list">
-      <li>Your spot in the Beat The Boys team at Run The Wharf, Thursday 3 September 2026.</li>
-      <li>Closed-road 5K through Canary Wharf after dark.</li>
-      <li>Discounted entry to Run The Wharf.</li>
-      <li>Custom BTB race bibs.</li>
-      <li>20 gifted pairs of socks to lucky winners.</li>
-      <li>We'll let you know how many boys you beat in your results.</li>
-      <li>Post-race party.</li>
-      <li>One night to put the boys behind you. Loudly.</li>
-    </ol>
 
     <section class="gallery" aria-label="Run The Wharf race photos">
       <div class="gallery-track" id="gallery-track">
@@ -742,21 +781,6 @@
         <div class="gallery-counter" id="gallery-counter">01 <span class="total">/ 06</span></div>
       </div>
     </section>
-
-    <div class="wharf-signup wharf-signup--secondary">
-      <div class="wharf-signup-eyebrow">Join the squad</div>
-      <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
-      <p class="wharf-signup-tag">
-        Drop your email. We'll send you the exclusive ticket link when our Beat The Boys tickets drop.
-      </p>
-      <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="wharf-signup" />
-        <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" required />
-        <button type="submit">Join the squad →</button>
-      </form>
-      <div class="wharf-fineprint">No spam. Race-day briefings only.</div>
-    </div>
 
     <div class="event-bottombar">
       <div>Beat The Boys × Run The Wharf × Friday Night Lights</div>
