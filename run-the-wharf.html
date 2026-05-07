@@ -569,6 +569,36 @@
     opacity: 0.5;
     position: relative; z-index: 2;
   }
+
+  /* Quieter "last chance" variant for the bottom-of-page form */
+  .wharf-signup--secondary {
+    margin: 16px 0;
+    padding: 22px 24px 20px;
+    background: transparent;
+    border-color: rgba(255, 61, 35, 0.45);
+    max-width: 640px;
+    opacity: 0.92;
+  }
+  .wharf-signup--secondary::before { display: none; }
+  .wharf-signup--secondary .wharf-signup-eyebrow { margin-bottom: 6px; opacity: 0.7; }
+  .wharf-signup--secondary .wharf-signup-headline {
+    font-size: clamp(20px, 2.4vw, 28px);
+    margin-bottom: 6px;
+  }
+  .wharf-signup--secondary .wharf-signup-tag {
+    font-size: 13px;
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+  .wharf-signup--secondary .wharf-form input[type="email"] {
+    padding: 13px 16px;
+    font-size: 12px;
+  }
+  .wharf-signup--secondary .wharf-form button {
+    font-size: 11px;
+    padding: 0 20px;
+  }
+  .wharf-signup--secondary .wharf-fineprint { margin-top: 10px; opacity: 0.4; }
 </style>
 </head>
 <body>
@@ -689,7 +719,7 @@
       </div>
     </section>
 
-    <div class="wharf-signup">
+    <div class="wharf-signup wharf-signup--secondary">
       <div class="wharf-signup-eyebrow">Join the squad</div>
       <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
       <p class="wharf-signup-tag">
