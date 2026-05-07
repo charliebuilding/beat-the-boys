@@ -144,8 +144,8 @@
   .event-credit img {
     display: block;
     width: auto;
-    height: clamp(28px, 3.6vw, 48px);
-    max-width: 60%;
+    height: clamp(18px, 2.2vw, 28px);
+    max-width: 70%;
   }
 
   .event-tag {
@@ -556,7 +556,7 @@
 
     <div class="event-credit">
       <span class="event-credit-label">— With</span>
-      <img src="images/FNL_Stacked_Colour_Light.png" alt="Friday Night Lights" />
+      <img src="images/FNL_Linear_Colour_Light.png" alt="Friday Night Lights" />
     </div>
 
     <div class="event-cta-wrap">
@@ -684,6 +684,15 @@
         track.scrollBy({ left: dir * w, behavior: 'smooth' });
       });
     });
+
+    // Forward vertical wheel/trackpad input to the page so the
+    // horizontal carousel never traps the user's scroll.
+    track.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+      }
+    }, { passive: false });
   })();
 
   (() => {
