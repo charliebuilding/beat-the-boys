@@ -349,12 +349,9 @@
   .gallery-track {
     display: flex;
     gap: 16px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
+    overflow: hidden;
+    scroll-behavior: smooth;
   }
-  .gallery-track::-webkit-scrollbar { display: none; }
 
   .gallery-slide {
     flex: 0 0 auto;
@@ -556,7 +553,7 @@
 
     <div class="event-credit">
       <span class="event-credit-label">— With</span>
-      <img src="images/FNL_Linear_Colour_Light.png" alt="Friday Night Lights" />
+      <img src="images/FNL_Stacked_Colour_Light.png" alt="Friday Night Lights" />
     </div>
 
     <div class="event-cta-wrap">
@@ -684,15 +681,6 @@
         track.scrollBy({ left: dir * w, behavior: 'smooth' });
       });
     });
-
-    // Forward vertical wheel/trackpad input to the page so the
-    // horizontal carousel never traps the user's scroll.
-    track.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        window.scrollBy({ top: e.deltaY, behavior: 'auto' });
-      }
-    }, { passive: false });
   })();
 
   (() => {
