@@ -189,6 +189,9 @@
   .hero-cta:hover { background: var(--bone); color: var(--ink); transform: translateX(3px); }
 
   .hero-signoff {
+    position: absolute;
+    top: 58%;
+    left: 24%;
     font-family: var(--marker);
     color: var(--neon);
     -webkit-text-stroke: 1.5px var(--ink);
@@ -197,24 +200,28 @@
       1.5px -1.5px 0 var(--ink),
       -1.5px 1.5px 0 var(--ink),
       1.5px 1.5px 0 var(--ink);
-    font-size: clamp(30px, 4.4vw, 60px);
+    font-size: clamp(34px, 5vw, 72px);
     line-height: 1;
-    margin: -8px 0 28px;
-    align-self: flex-start;
-    transform: rotate(-3deg);
-    transform-origin: left center;
-    opacity: 0;
-    animation: fadeUp .8s .7s ease forwards;
+    transform: rotate(-14deg);
+    transform-origin: center;
+    white-space: nowrap;
+    z-index: 5;
     pointer-events: none;
+    opacity: 0;
+    animation: fade 1s .9s ease forwards;
   }
   .hero-signoff-x {
     display: inline-block;
     margin-left: 14px;
-    font-size: 1.1em;
-    transform: rotate(10deg);
+    font-size: 1.15em;
+    transform: rotate(12deg);
   }
   @media (max-width: 720px) {
-    .hero-signoff { font-size: 26px; margin: -4px 0 22px; }
+    .hero-signoff {
+      top: 56%;
+      left: 18%;
+      font-size: 28px;
+    }
   }
 
   /* ============ BOTTOM ZONE (BLACK with RED accent) ============ */
