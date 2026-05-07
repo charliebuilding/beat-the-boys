@@ -27,6 +27,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html, body { height: 100%; }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--ink);
@@ -291,6 +292,8 @@
     transition: background .25s ease, color .25s ease, transform .25s ease;
   }
   .event-cta:hover { background: var(--bone); color: var(--ink); transform: translateX(3px); }
+
+  .event-cta-wrap { margin: 0 0 40px; }
 
   .event-bottombar {
     margin-top: 64px;
@@ -559,8 +562,12 @@
       <img src="images/FNL_Stacked_Colour_Light.png" alt="Friday Night Lights" />
     </div>
 
+    <div class="event-cta-wrap">
+      <a href="#lock-it-in" class="event-cta">Lock it in →</a>
+    </div>
+
     <p class="event-tag">
-      This September, we're rolling into Canary Wharf as a squad. First off the line. Same kit. Better times.
+      This September, we're rolling into Canary Wharf as a squad. Run The Wharf is the UK's biggest closed-road night race 5K. 5,000 runners. Canary Wharf shut down for a one-night-only festival and race on London's closed roads. The perfect place to beat the boys.
     </p>
 
     <div class="event-grid">
@@ -581,10 +588,6 @@
         <span class="event-cell-value">Canary Wharf</span>
       </div>
     </div>
-
-    <p class="event-body">
-      Run The Wharf is the UK's biggest closed-road night race 5K. 5,000 runners. Canary Wharf shut down for one night only.
-    </p>
 
     <section class="gallery" aria-label="Run The Wharf race photos">
       <div class="gallery-track" id="gallery-track">
@@ -629,7 +632,7 @@
       <li>One night to put the boys behind you. Loudly.</li>
     </ol>
 
-    <div class="wharf-signup">
+    <div class="wharf-signup" id="lock-it-in">
       <div class="wharf-signup-eyebrow">Join the squad</div>
       <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
       <p class="wharf-signup-tag">
