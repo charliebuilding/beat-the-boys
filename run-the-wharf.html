@@ -54,8 +54,18 @@
     z-index: 5;
   }
   @media (max-width: 720px) { .topbar { padding: 24px; } }
-  .topbar a { color: inherit; text-decoration: none; transition: opacity .2s; }
+  .topbar a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity .2s;
+    padding: 8px 0;
+    display: inline-block;
+  }
   .topbar a:hover { opacity: 0.6; }
+  @media (max-width: 480px) {
+    .topbar { font-size: 10px; letter-spacing: 0.14em; }
+    .topbar-logo { font-size: 12px !important; }
+  }
   .topbar-logo {
     font-family: var(--display);
     font-size: 13px;
@@ -436,6 +446,20 @@
     overflow: hidden;
     scroll-behavior: smooth;
   }
+  /* Touch devices: re-enable native horizontal scroll + snap so users
+     can swipe through the gallery. Desktop keeps overflow: hidden so
+     the carousel can't trap mouse-wheel scrolling. */
+  @media (pointer: coarse) {
+    .gallery-track {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .gallery-track::-webkit-scrollbar { display: none; }
+    .gallery-slide { scroll-snap-align: start; }
+  }
 
   .gallery-slide {
     flex: 0 0 auto;
@@ -680,7 +704,7 @@
       <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="wharf-signup" />
         <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" required />
+        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
         <button type="submit">Join the squad →</button>
       </form>
       <div class="wharf-fineprint">No spam. Race-day briefings only.</div>
@@ -748,7 +772,7 @@
       <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="wharf-signup" />
         <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" required />
+        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
         <button type="submit">Join the squad →</button>
       </form>
       <div class="wharf-fineprint">No spam. Race-day briefings only.</div>
@@ -757,22 +781,46 @@
     <section class="gallery" aria-label="Run The Wharf race photos">
       <div class="gallery-track" id="gallery-track">
         <figure class="gallery-slide">
-          <img src="images/IMG_8558.JPG" alt="Run The Wharf race photo" loading="lazy" />
+          <picture>
+            <source media="(max-width: 720px)" srcset="images/wharf/img_8558-mobile.webp" type="image/webp" />
+            <source srcset="images/wharf/img_8558-desktop.webp" type="image/webp" />
+            <img src="images/IMG_8558.JPG" alt="Run The Wharf race photo" loading="lazy" width="1334" height="2000" />
+          </picture>
         </figure>
         <figure class="gallery-slide">
-          <img src="images/IMG_8587.JPG" alt="Run The Wharf race photo" loading="lazy" />
+          <picture>
+            <source media="(max-width: 720px)" srcset="images/wharf/img_8587-mobile.webp" type="image/webp" />
+            <source srcset="images/wharf/img_8587-desktop.webp" type="image/webp" />
+            <img src="images/IMG_8587.JPG" alt="Run The Wharf race photo" loading="lazy" width="1333" height="2000" />
+          </picture>
         </figure>
         <figure class="gallery-slide">
-          <img src="images/IMG_8591.JPG" alt="Run The Wharf race photo" loading="lazy" />
+          <picture>
+            <source media="(max-width: 720px)" srcset="images/wharf/img_8591-mobile.webp" type="image/webp" />
+            <source srcset="images/wharf/img_8591-desktop.webp" type="image/webp" />
+            <img src="images/IMG_8591.JPG" alt="Run The Wharf race photo" loading="lazy" width="2000" height="1333" />
+          </picture>
         </figure>
         <figure class="gallery-slide">
-          <img src="images/IMG_8593.JPG" alt="Run The Wharf race photo" loading="lazy" />
+          <picture>
+            <source media="(max-width: 720px)" srcset="images/wharf/img_8593-mobile.webp" type="image/webp" />
+            <source srcset="images/wharf/img_8593-desktop.webp" type="image/webp" />
+            <img src="images/IMG_8593.JPG" alt="Run The Wharf race photo" loading="lazy" width="1333" height="2000" />
+          </picture>
         </figure>
         <figure class="gallery-slide">
-          <img src="images/IMG_8602.JPG" alt="Run The Wharf race photo" loading="lazy" />
+          <picture>
+            <source media="(max-width: 720px)" srcset="images/wharf/img_8602-mobile.webp" type="image/webp" />
+            <source srcset="images/wharf/img_8602-desktop.webp" type="image/webp" />
+            <img src="images/IMG_8602.JPG" alt="Run The Wharf race photo" loading="lazy" width="1333" height="2000" />
+          </picture>
         </figure>
         <figure class="gallery-slide">
-          <img src="images/IMG_8620.JPG" alt="Run The Wharf race photo" loading="lazy" />
+          <picture>
+            <source media="(max-width: 720px)" srcset="images/wharf/img_8620-mobile.webp" type="image/webp" />
+            <source srcset="images/wharf/img_8620-desktop.webp" type="image/webp" />
+            <img src="images/IMG_8620.JPG" alt="Run The Wharf race photo" loading="lazy" width="2000" height="1334" />
+          </picture>
         </figure>
       </div>
       <div class="gallery-controls">
