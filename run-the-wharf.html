@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Beat The Boys × Run The Wharf · Race 01</title>
-<meta name="description" content="Beat the boys. Take the Wharf. Thursday 3 September 2026, Canary Wharf." />
+<meta name="description" content="Beat the boys. Run the Wharf. Thursday 3 September 2026, Canary Wharf." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -629,6 +629,30 @@
     }
   }
 
+  .wharf-cta {
+    display: block;
+    text-align: center;
+    padding: 18px 20px;
+    border: 1.5px solid var(--rust);
+    background: var(--rust);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .25s ease, color .25s ease, box-shadow .25s ease, border-color .25s ease;
+    position: relative; z-index: 2;
+  }
+  .wharf-cta:hover, .wharf-cta:focus-visible {
+    background: var(--bone);
+    color: var(--ink);
+    border-color: var(--bone);
+    box-shadow: 4px 4px 0 var(--rust);
+    outline: none;
+  }
+
   .wharf-fineprint {
     margin-top: 14px;
     font-family: var(--mono);
@@ -695,19 +719,18 @@
       <a class="event-credit-ig" href="https://www.instagram.com/fridaynightlights.run/" target="_blank" rel="noopener">Follow @fridaynightlights ↗</a>
     </div>
 
-    <div class="wharf-signup wharf-signup--secondary">
+    <div class="wharf-signup wharf-signup--secondary" id="lock-it-in">
       <div class="wharf-signup-eyebrow">Join the squad</div>
       <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
       <p class="wharf-signup-tag">
-        Drop your email. We'll send you the exclusive ticket link when our Beat The Boys tickets drop.
+        Tickets are live. Lock in your place on the start line.
       </p>
-      <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="wharf-signup" />
-        <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
-        <button type="submit">Join the squad →</button>
-      </form>
-      <div class="wharf-fineprint">No spam. Race-day briefings only.</div>
+      <a class="wharf-cta"
+         href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&utm_source=reserved_entry&occurrenceId=21111161678&reservationCode=re_s5wemku06i5l"
+         target="_blank" rel="noopener">
+        Get your tickets →
+      </a>
+      <div class="wharf-fineprint">Secure checkout via Let's Do This.</div>
     </div>
 
     <div class="event-tags">
@@ -763,11 +786,11 @@
       <li>One night to put the boys behind you. Loudly.</li>
     </ol>
 
-    <div class="wharf-signup" id="lock-it-in">
+    <div class="wharf-signup">
       <div class="wharf-signup-eyebrow">Join the squad</div>
       <h3 class="wharf-signup-headline">Lock it <span class="accent">in.</span></h3>
       <p class="wharf-signup-tag">
-        Drop your email. We'll send you the exclusive ticket link when our Beat The Boys tickets drop.
+        Not racing this time? Drop your email and we'll keep you in the loop on everything Beat The Boys.
       </p>
       <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="wharf-signup" />
