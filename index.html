@@ -179,6 +179,15 @@
     animation: fadeUp .8s .65s ease forwards;
   }
 
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-self: flex-start;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp .8s .5s ease forwards;
+  }
   .hero-cta {
     display: inline-flex;
     align-items: center;
@@ -186,18 +195,17 @@
     padding: 16px 26px;
     background: var(--ink);
     color: var(--rust);
+    border: 1.5px solid var(--ink);
     font-family: var(--display);
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     text-decoration: none;
-    margin-bottom: 28px;
-    align-self: flex-start;
     transition: background .25s ease, color .25s ease, transform .25s ease;
-    opacity: 0;
-    animation: fadeUp .8s .5s ease forwards;
   }
-  .hero-cta:hover { background: var(--bone); color: var(--ink); transform: translateX(3px); }
+  .hero-cta:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); transform: translateX(3px); }
+  .hero-cta--ghost { background: transparent; color: var(--ink); }
+  .hero-cta--ghost:hover { background: var(--ink); color: var(--rust); border-color: var(--ink); }
 
   /* ============ BOTTOM ZONE (BLACK with RED accent) ============ */
   .bottom {
@@ -333,10 +341,138 @@
     opacity: 0.4;
   }
 
-  /* Bottom strip · meta line */
-  .bottombar {
-    margin-top: 28px;
-    padding-top: 18px;
+  /* ============ CONTENT SECTIONS ============ */
+  .section {
+    background: var(--ink);
+    background-image:
+      linear-gradient(to right, rgba(244, 241, 234, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(244, 241, 234, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--bone);
+    padding: 92px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .section + .section { border-top: 1px solid rgba(255, 61, 35, 0.18); }
+  @media (max-width: 720px) { .section { padding: 60px 24px; } }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative; z-index: 2;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--rust);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 22px;
+  }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--rust); }
+
+  .section-headline {
+    font-family: var(--display);
+    font-size: clamp(32px, 5.4vw, 68px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--bone);
+    margin-bottom: 30px;
+    max-width: 14ch;
+  }
+  .section-headline .accent { color: var(--rust); }
+
+  .section-lead {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.55;
+    color: var(--bone);
+    opacity: 0.88;
+    max-width: 620px;
+    margin-bottom: 18px;
+  }
+  .section-lead:last-of-type { margin-bottom: 0; }
+
+  .signoff {
+    font-family: var(--marker);
+    color: var(--neon);
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.1;
+    margin-top: 38px;
+    transform: rotate(-3deg);
+    transform-origin: left center;
+  }
+  .signoff-x { display: inline-block; margin-left: 6px; transform: rotate(8deg); }
+
+  /* Race feature stats */
+  .race-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 38px 0 36px;
+    border: 1px solid rgba(255, 61, 35, 0.3);
+  }
+  .race-stat {
+    flex: 1 1 140px;
+    padding: 20px 22px;
+    border-right: 1px solid rgba(255, 61, 35, 0.3);
+  }
+  .race-stat:last-child { border-right: 0; }
+  .race-stat .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--bone);
+    opacity: 0.55;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .race-stat .v {
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 24px);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--bone);
+    line-height: 1;
+  }
+  @media (max-width: 540px) {
+    .race-stat { flex: 1 1 50%; border-bottom: 1px solid rgba(255, 61, 35, 0.3); }
+    .race-stat:nth-child(2n) { border-right: 0; }
+    .race-stat:nth-last-child(-n+2) { border-bottom: 0; }
+  }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    font-family: var(--display);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border: 1.5px solid var(--rust);
+    transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .btn--primary { background: var(--rust); color: var(--ink); }
+  .btn--primary:hover {
+    background: var(--bone); color: var(--ink); border-color: var(--bone);
+    transform: translateX(3px); box-shadow: 4px 4px 0 var(--rust);
+  }
+  .btn--ghost { background: transparent; color: var(--bone); }
+  .btn--ghost:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+
+  /* Site footer */
+  .site-footer {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 26px 40px;
     border-top: 1px solid rgba(255, 61, 35, 0.3);
     display: flex;
     justify-content: space-between;
@@ -345,23 +481,20 @@
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: var(--bone);
-    opacity: 0.7;
     flex-wrap: wrap;
     gap: 10px;
-    position: relative; z-index: 2;
   }
-  .bottombar .num {
+  @media (max-width: 720px) { .site-footer { padding: 24px; } }
+  .site-footer .num {
     font-family: var(--display);
     font-size: 22px;
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--rust);
-    opacity: 1;
   }
-  .bottombar .right {
-    display: flex; gap: 16px; align-items: end;
-  }
+  .site-footer .right { display: flex; gap: 16px; align-items: end; }
+  .site-footer a { color: inherit; text-decoration: none; transition: opacity .2s; }
+  .site-footer a:hover { opacity: 0.6; }
 
   @keyframes fade { to { opacity: 1; } }
   @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
@@ -381,6 +514,7 @@
       <div class="topbar-logo">Beat The Boys</div>
       <nav class="topbar-nav">
         <a href="run-the-wharf.html">Race 01 ↗</a>
+        <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" target="_blank" rel="noopener">Get Tickets ↗</a>
         <a href="https://www.instagram.com/marymccarths?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">@marymccarths ↗</a>
       </nav>
     </header>
@@ -393,7 +527,10 @@
         <span class="line">The Boys.</span>
       </h1>
 
-      <a href="run-the-wharf.html" class="hero-cta">Race 1 · London →</a>
+      <div class="hero-ctas">
+        <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" class="hero-cta" target="_blank" rel="noopener">Get Tickets →</a>
+        <a href="run-the-wharf.html" class="hero-cta hero-cta--ghost">Race 1 · London →</a>
+      </div>
 
       <p class="tag">
         Built for the girls who came to race. Train hard, race honest. Beat more boys than last time.
@@ -422,17 +559,56 @@
       </div>
 
     </div>
-
-    <div class="bottombar">
-      <div>© Beat The Boys 2026</div>
-      <div class="right">
-        <span>#beattheboys</span>
-        <span class="num">01</span>
-      </div>
-    </div>
   </section>
 
 </div>
+
+<!-- ========== ABOUT BTB ========== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">The Series</div>
+    <h2 class="section-headline">For the girls who came to <span class="accent">race.</span></h2>
+    <p class="section-lead">
+      Beat The Boys is a global race series built for women who line up to compete — not to make up the numbers. The brief is simple: beat more boys than you did last time.
+    </p>
+    <p class="section-lead">
+      Every race is a closed-road, full-send night out. A squad in matching bibs, a real start line, real results, and a party at the finish. We'll tell you exactly how many boys you beat. Then we go again.
+    </p>
+    <p class="signoff">by Mary McCarths <span class="signoff-x">x</span></p>
+  </div>
+</section>
+
+<!-- ========== RACE 01 · TICKETS ========== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Race 01 · London</div>
+    <h2 class="section-headline">Run The <span class="accent">Wharf.</span></h2>
+    <p class="section-lead">
+      We're taking the first all-female Beat The Boys team to Run The Wharf — the UK's biggest closed-road 5K night race. 5,000 runners, London's roads shut down, dusk til dark through Canary Wharf. The perfect place to beat the boys.
+    </p>
+
+    <div class="race-stats">
+      <div class="race-stat"><span class="k">Date</span><span class="v">Thu 03.09.26</span></div>
+      <div class="race-stat"><span class="k">Distance</span><span class="v">5K</span></div>
+      <div class="race-stat"><span class="k">When</span><span class="v">Dusk to dark</span></div>
+      <div class="race-stat"><span class="k">Location</span><span class="v">Canary Wharf</span></div>
+    </div>
+
+    <div class="btn-row">
+      <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" class="btn btn--primary" target="_blank" rel="noopener">Get Tickets →</a>
+      <a href="run-the-wharf.html" class="btn btn--ghost">Full race details →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div>© Beat The Boys 2026</div>
+  <div class="right">
+    <a href="https://www.instagram.com/marymccarths?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">#beattheboys</a>
+    <span class="num">01</span>
+  </div>
+</footer>
 
 <script>
   const form = document.querySelector('.form');
