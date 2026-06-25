@@ -514,6 +514,7 @@
       <div class="topbar-logo">Beat The Boys</div>
       <nav class="topbar-nav">
         <a href="run-the-wharf.html">Race 01 ↗</a>
+        <a href="race-2.html">Race 02 ↗</a>
         <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" target="_blank" rel="noopener">Get Tickets ↗</a>
         <a href="https://www.instagram.com/marymccarths?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">@marymccarths ↗</a>
       </nav>
@@ -601,6 +602,32 @@
   </div>
 </section>
 
+<!-- ========== RACE 02 · COMING SOON ========== -->
+<section class="section" id="race-02">
+  <div class="section-inner">
+    <div class="section-eyebrow">Race 02 · Summer 2027</div>
+    <h2 class="section-headline">The next one's <span class="accent">coming.</span></h2>
+    <p class="section-lead">
+      Race Two lands Summer 2027. Location, distance, the lot — all still under wraps. Drop your email and you'll be first to know.
+    </p>
+
+    <div class="race-stats">
+      <div class="race-stat"><span class="k">When</span><span class="v">Summer 2027</span></div>
+    </div>
+
+    <div class="signup">
+      <span class="signup-label">Be first to know</span>
+      <form class="form" name="race-2-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="race-2-signup" />
+        <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
+        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
+        <button type="submit">Keep me posted →</button>
+      </form>
+      <div class="fineprint">No spam. We'll only email when there's something to say.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== FOOTER ========== -->
 <footer class="site-footer">
   <div>© Beat The Boys 2026</div>
@@ -611,40 +638,41 @@
 </footer>
 
 <script>
-  const form = document.querySelector('.form');
-  const input = form.querySelector('input[type="email"]');
-  const btn = form.querySelector('button');
+  document.querySelectorAll('.form').forEach((form) => {
+    const input = form.querySelector('input[type="email"]');
+    const btn = form.querySelector('button');
 
-  const shake = () => form.animate(
-    [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
-    { duration: 250 }
-  );
+    const shake = () => form.animate(
+      [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
+      { duration: 250 }
+    );
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!input.value || !input.value.includes('@')) {
-      input.focus();
-      shake();
-      return;
-    }
-    try {
-      const body = new URLSearchParams(new FormData(form)).toString();
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body
-      });
-      if (!res.ok) throw new Error('submit failed');
-      btn.textContent = "You're in ✓";
-      btn.style.background = 'var(--neon)';
-      btn.style.color = 'var(--bone)';
-      input.value = '';
-      input.placeholder = 'see you at the start line';
-      input.disabled = true;
-    } catch (err) {
-      btn.textContent = 'Try again';
-      shake();
-    }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!input.value || !input.value.includes('@')) {
+        input.focus();
+        shake();
+        return;
+      }
+      try {
+        const body = new URLSearchParams(new FormData(form)).toString();
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body
+        });
+        if (!res.ok) throw new Error('submit failed');
+        btn.textContent = "You're in ✓";
+        btn.style.background = 'var(--neon)';
+        btn.style.color = 'var(--bone)';
+        input.value = '';
+        input.placeholder = 'see you at the start line';
+        input.disabled = true;
+      } catch (err) {
+        btn.textContent = 'Try again';
+        shake();
+      }
+    });
   });
 </script>
 
