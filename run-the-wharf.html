@@ -415,6 +415,12 @@
   .event-bottombar .right {
     display: flex; gap: 16px; align-items: end;
   }
+  .event-bottombar a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .event-bottombar a:hover { opacity: 0.6; }
 
   .event-scrawl {
     position: absolute;
@@ -856,6 +862,7 @@
     <div class="event-bottombar">
       <div>Beat The Boys × Run The Wharf × Friday Night Lights</div>
       <div class="right">
+        <a href="privacy.html">Privacy</a>
         <span>#runthewharf</span>
         <span class="num">02</span>
       </div>

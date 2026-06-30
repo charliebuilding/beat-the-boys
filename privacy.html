@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Beat The Boys — Privacy</title>
+<meta name="description" content="How Beat The Boys collects, uses and protects your data. Data controller: Run Social Ltd." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --rust: #FF3D23;
+    --ink: #0A0A0A;
+    --bone: #F4F1EA;
+
+    --display: 'Archivo Black', 'Helvetica Neue', sans-serif;
+    --body: 'Archivo', system-ui, sans-serif;
+    --editorial: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: var(--body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--rust); color: var(--ink); }
+
+  a { color: var(--rust); text-decoration: none; border-bottom: 1px solid currentColor; transition: opacity .2s; }
+  a:hover { opacity: 0.7; }
+
+  /* ============ TOPBAR ============ */
+  .topbar {
+    background: var(--ink);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+  }
+  @media (max-width: 720px) { .topbar { padding: 24px; } }
+  .topbar a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 0;
+    transition: opacity .2s;
+    padding: 8px 0;
+    display: inline-block;
+  }
+  .topbar a:hover { opacity: 0.6; }
+  .topbar-logo {
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ PAGE ============ */
+  .privacy {
+    background: var(--ink);
+    background-image:
+      linear-gradient(to right, rgba(244, 241, 234, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(244, 241, 234, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    padding: 80px 40px 96px;
+  }
+  @media (max-width: 720px) { .privacy { padding: 56px 24px 72px; } }
+
+  .privacy-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .privacy-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--bone);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .privacy-eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--bone); opacity: 0.6;
+  }
+
+  .privacy-title {
+    font-family: var(--display);
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .privacy-lead {
+    font-family: var(--editorial);
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.25;
+    color: var(--bone);
+    max-width: 620px;
+    margin-bottom: 56px;
+    letter-spacing: -0.01em;
+  }
+
+  .privacy h2 {
+    font-family: var(--display);
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--bone);
+    margin: 48px 0 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(244, 241, 234, 0.18);
+  }
+
+  .privacy h2 .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--rust);
+    margin-right: 14px;
+    font-weight: 500;
+    vertical-align: middle;
+  }
+
+  .privacy p {
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.6;
+    color: var(--bone);
+    opacity: 0.9;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .privacy ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    max-width: 640px;
+  }
+  .privacy ul li {
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.55;
+    color: var(--bone);
+    opacity: 0.9;
+    padding: 8px 0 8px 22px;
+    position: relative;
+  }
+  .privacy ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+    font-family: var(--mono);
+  }
+
+  .privacy strong { font-weight: 700; opacity: 1; }
+
+  /* ============ FOOTER ============ */
+  .site-footer {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 26px 40px;
+    border-top: 1px solid rgba(255, 61, 35, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  @media (max-width: 720px) { .site-footer { padding: 24px; } }
+  .site-footer a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 0;
+    transition: opacity .2s;
+  }
+  .site-footer a:hover { opacity: 0.6; }
+  .site-footer .right { display: flex; gap: 16px; align-items: end; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/" class="topbar-logo">← Beat The Boys</a>
+  <a href="https://www.instagram.com/marymccarths" target="_blank" rel="noopener">@marymccarths ↗</a>
+</header>
+
+<main class="privacy">
+  <div class="privacy-inner">
+
+    <div class="privacy-eyebrow">Privacy &nbsp;·&nbsp; Last updated 8 May 2026</div>
+
+    <h1 class="privacy-title">Privacy.</h1>
+
+    <p class="privacy-lead">
+      Short version: we collect your email when you ask us to, we use it to tell you about Beat The Boys, and we don't sell or share it for marketing by anyone else.
+    </p>
+
+    <h2><span class="num">01</span>Who we are</h2>
+    <p>
+      <strong>Beat The Boys</strong> is a global race series and creative collaboration between <strong>Mary McCarthy</strong> and <strong>Friday Night Lights</strong>.
+    </p>
+    <p>
+      The data controller for everything you submit through this website is <strong>Run Social Ltd</strong>, the company that operates Friday Night Lights (company number <a href="#" aria-label="Company number placeholder">[company number]</a>, registered office <a href="#" aria-label="Registered address placeholder">[registered address]</a>). When this policy says "we", "us" or "our", we mean Run Social Ltd.
+    </p>
+
+    <h2><span class="num">02</span>What we collect</h2>
+    <p>
+      From this site, we collect:
+    </p>
+    <ul>
+      <li><strong>Your email address</strong>, when you submit one of the signup forms (the general squad list, or a specific race's list).</li>
+      <li><strong>Basic technical information</strong> your browser sends automatically — IP address, device and browser type — which our hosting provider uses to keep the site running and protected from abuse.</li>
+    </ul>
+    <p>
+      We don't run third-party advertising trackers and we don't set behavioural cookies on this site.
+    </p>
+
+    <h2><span class="num">03</span>Why we use it, and our lawful basis</h2>
+    <ul>
+      <li><strong>To email you about Beat The Boys</strong> — race drops, ticket releases, training stuff, the occasional update. Lawful basis: your consent, given when you submit the form.</li>
+      <li><strong>To keep the site working and safe</strong> — security, abuse prevention, basic operational logs from our hosting provider. Lawful basis: our legitimate interest in running a functioning website.</li>
+      <li><strong>To meet legal obligations</strong> if we ever need to (for example, responding to a lawful request). Lawful basis: legal obligation.</li>
+    </ul>
+
+    <h2><span class="num">04</span>Who we share it with</h2>
+    <p>
+      We share your data only with the service providers we need to run the site:
+    </p>
+    <ul>
+      <li><strong>Netlify</strong> — hosts the site and processes the signup forms on our behalf.</li>
+      <li><strong>Google Fonts</strong> — serves the fonts you see on the page. Google may log your IP when your browser requests a font.</li>
+      <li><strong>An email service provider</strong> we use to send the updates you've signed up for.</li>
+    </ul>
+    <p>
+      Each of these is a data processor acting on our instructions. We don't sell your data, and we don't share it with anyone for their own marketing.
+    </p>
+
+    <h2><span class="num">05</span>How long we keep it</h2>
+    <p>
+      We keep your email on the squad list until you ask us to remove it, or until we decide a list has gone cold and clean it up. Operational logs from our hosting provider are kept for a short, rolling window for security and performance reasons.
+    </p>
+
+    <h2><span class="num">06</span>Your rights</h2>
+    <p>
+      Under UK GDPR you have the right to:
+    </p>
+    <ul>
+      <li>Ask for a copy of the personal data we hold about you.</li>
+      <li>Ask us to correct anything that's wrong.</li>
+      <li>Ask us to delete your data, or restrict how we use it.</li>
+      <li>Withdraw your consent at any time — every email we send includes an unsubscribe link.</li>
+      <li>Object to how we're using your data.</li>
+      <li>Complain to the UK Information Commissioner's Office (<a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>) if you think we've got something wrong.</li>
+    </ul>
+
+    <h2><span class="num">07</span>Contact</h2>
+    <p>
+      To exercise any of the above, or just to ask a question, email us at <a href="mailto:team@fridaynightlights.run">team@fridaynightlights.run</a>.
+    </p>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div>© Beat The Boys 2026 · Run Social Ltd</div>
+  <div class="right">
+    <a href="/">Home</a>
+    <a href="run-the-wharf.html">Race 01</a>
+  </div>
+</footer>
+
+</body>
+</html>
