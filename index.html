@@ -44,10 +44,11 @@
   ::selection { background: var(--ink); color: var(--rust); }
 
   .stage {
-    min-height: 100svh;
     min-height: 100vh;
+    min-height: 100svh;
     display: grid;
     grid-template-rows: minmax(58vh, auto) 1fr;
+    grid-template-rows: minmax(58svh, auto) 1fr;
     position: relative;
   }
 
@@ -80,15 +81,22 @@
     color: inherit;
     text-decoration: none;
     transition: opacity .2s;
-    padding: 8px 0; /* extends touch target without changing the visual */
+    padding: 12px 4px; /* extends touch target without changing the visual */
+    margin: 0 -4px;
     display: inline-block;
+    white-space: nowrap;
   }
   .topbar a:hover { opacity: 0.6; }
   .topbar-nav { display: flex; gap: 22px; align-items: center; }
+  @media (max-width: 540px) {
+    .topbar { flex-wrap: wrap; row-gap: 6px; }
+    .topbar-nav { flex-wrap: wrap; gap: 8px 14px; }
+    /* IG handle lives in the footer; keep the race + ticket links reachable */
+    .topbar-nav a[href*="instagram"] { display: none; }
+  }
   @media (max-width: 480px) {
     .topbar { font-size: 10px; letter-spacing: 0.14em; }
-    .topbar-nav { gap: 14px; }
-    .topbar-logo { font-size: 12px; }
+    .topbar-nav { gap: 8px 14px; }
   }
   .topbar-logo {
     font-family: var(--display);
@@ -133,13 +141,22 @@
     text-decoration: none;
     font-weight: 700;
     border-bottom: 1px solid currentColor;
-    padding-bottom: 1px;
+    padding: 10px 0 1px;
+    margin-top: -10px;
     transition: opacity .2s;
+    white-space: nowrap;
   }
   .eyebrow a:hover { opacity: 0.6; }
 
   .title {
     margin-bottom: clamp(80px, 12vh, 128px);
+  }
+  @media (max-width: 720px) {
+    .eyebrow { flex-wrap: wrap; row-gap: 8px; margin-bottom: clamp(36px, 6vh, 56px); }
+    .title { margin-bottom: clamp(40px, 7vh, 64px); }
+  }
+  @media (max-width: 480px) {
+    .eyebrow-lead, .eyebrow-sep { display: none; }
   }
   .title-logo {
     display: block;
@@ -152,37 +169,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .title-logo { animation: none; opacity: 1; transform: none; }
-  }
-
-  .scrawl {
-    position: absolute;
-    top: 6%; right: 2%;
-    font-family: var(--marker);
-    color: var(--neon);
-    text-transform: uppercase;
-    pointer-events: none;
-    line-height: 0.95;
-    font-size: clamp(20px, 2.6vw, 34px);
-    transform: rotate(-8deg);
-    text-align: center;
-    max-width: 220px;
-    opacity: 0;
-    animation: fade 1s .9s ease forwards;
-  }
-  @media (max-width: 720px) {
-    .scrawl { font-size: 16px; max-width: 130px; top: 4%; right: 6%; }
-  }
-
-  .tag {
-    font-family: var(--body);
-    font-weight: 500;
-    font-size: clamp(15px, 1.6vw, 20px);
-    line-height: 1.4;
-    color: var(--ink);
-    max-width: 560px;
-    opacity: 0;
-    animation: fadeUp .8s .65s ease forwards;
+    .title-logo, .eyebrow, .hero .countdown, .hero-ctas, .signup {
+      animation: none; opacity: 1; transform: none;
+    }
   }
 
   .hero-ctas {
@@ -192,7 +181,7 @@
     align-self: flex-start;
     margin-bottom: 36px;
     opacity: 0;
-    animation: fadeUp .8s .5s ease forwards;
+    animation: fadeUp .8s .65s ease forwards;
   }
   .hero-cta {
     display: inline-flex;
@@ -303,7 +292,11 @@
   }
   .form input {
     flex: 1;
+    min-width: 0;
     border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
     padding: 16px 18px;
     font-family: var(--mono);
     font-size: 13px;
@@ -311,6 +304,10 @@
     color: var(--bone);
     outline: none;
     letter-spacing: 0.04em;
+  }
+  /* 16px floor stops iOS Safari zooming the page when the field is focused */
+  @media (pointer: coarse) {
+    .form input { font-size: 16px; }
   }
   .form input::placeholder { color: var(--rust); opacity: 0.7; }
   .form .hp { position: absolute; left: -9999px; }
@@ -461,6 +458,17 @@
 
   /* Race-day countdown */
   .countdown { margin: 0 0 36px; }
+  .hero .countdown {
+    margin: 0 0 clamp(36px, 5vh, 56px);
+    opacity: 0;
+    animation: fadeUp .8s .5s ease forwards;
+  }
+  .hero .countdown-label { color: var(--ink); }
+  .hero .countdown-cells { border-color: rgba(10, 10, 10, 0.4); background: transparent; }
+  .hero .countdown-cell { border-color: rgba(10, 10, 10, 0.4); }
+  .hero .countdown-cell .n,
+  .hero .countdown-cell .u,
+  .hero .countdown-over { color: var(--ink); }
   .countdown-label {
     font-family: var(--mono);
     font-size: 10px;
@@ -574,7 +582,13 @@
     color: var(--rust);
   }
   .site-footer .right { display: flex; gap: 16px; align-items: end; }
-  .site-footer a { color: inherit; text-decoration: none; transition: opacity .2s; }
+  .site-footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity .2s;
+    padding: 12px 4px;
+    margin: -12px -4px;
+  }
   .site-footer a:hover { opacity: 0.6; }
   .site-footer .footer-brand { display: flex; align-items: center; gap: 12px; }
   .site-footer .footer-brand img { height: 20px; width: auto; display: block; }
@@ -608,21 +622,27 @@
     </header>
 
     <div class="hero">
-      <div class="eyebrow">A Global Race Series &nbsp;·&nbsp; <a href="run-the-wharf.html">Race 1 · London</a> &nbsp;·&nbsp; <a href="race-2.html">Race 2 · 2027</a></div>
+      <div class="eyebrow"><span class="eyebrow-lead">A Global Race Series &nbsp;·&nbsp;</span> <a href="run-the-wharf.html">Race 1 · London</a> <span class="eyebrow-sep">&nbsp;·&nbsp;</span> <a href="race-2.html">Race 2 · 2027</a></div>
 
       <h1 class="title">
         <img class="title-logo" src="images/BTB_Wordmark_Black.png" alt="Beat The Boys" />
       </h1>
+
+      <div class="countdown" aria-label="Countdown to race day">
+        <span class="countdown-label">Race day in</span>
+        <div class="countdown-cells">
+          <div class="countdown-cell"><span class="n" data-unit="days">--</span><span class="u">Days</span></div>
+          <div class="countdown-cell"><span class="n" data-unit="hours">--</span><span class="u">Hrs</span></div>
+          <div class="countdown-cell"><span class="n" data-unit="mins">--</span><span class="u">Min</span></div>
+          <div class="countdown-cell"><span class="n" data-unit="secs">--</span><span class="u">Sec</span></div>
+        </div>
+      </div>
 
       <div class="hero-ctas">
         <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" class="hero-cta" target="_blank" rel="noopener">Get Tickets →</a>
         <a href="run-the-wharf.html" class="hero-cta hero-cta--ghost">Race 1 · London →</a>
         <a href="race-2.html" class="hero-cta hero-cta--ghost">Race 2 · 2027 →</a>
       </div>
-
-      <p class="tag">
-        Built for girls who came to disrupt. Let's beat them at their own game.
-      </p>
     </div>
   </section>
 
@@ -640,7 +660,7 @@
         <form class="form" name="signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="signup" />
           <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-          <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
+          <input type="email" name="email" placeholder="you@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
           <button type="submit">Sign me up →</button>
         </form>
         <div class="fineprint">No spam. No filler. Occasional emails only.</div>
@@ -683,16 +703,6 @@
       <div class="race-stat"><span class="k">Location</span><span class="v">Canary Wharf</span></div>
     </div>
 
-    <div class="countdown" aria-label="Countdown to race day">
-      <span class="countdown-label">Race day in</span>
-      <div class="countdown-cells">
-        <div class="countdown-cell"><span class="n" data-unit="days">--</span><span class="u">Days</span></div>
-        <div class="countdown-cell"><span class="n" data-unit="hours">--</span><span class="u">Hrs</span></div>
-        <div class="countdown-cell"><span class="n" data-unit="mins">--</span><span class="u">Min</span></div>
-        <div class="countdown-cell"><span class="n" data-unit="secs">--</span><span class="u">Sec</span></div>
-      </div>
-    </div>
-
     <div class="btn-row">
       <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" class="btn btn--primary" target="_blank" rel="noopener">Get Tickets →</a>
       <a href="run-the-wharf.html" class="btn btn--ghost">Full race details →</a>
@@ -718,7 +728,7 @@
       <form class="form" name="race-2-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="race-2-signup" />
         <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
+        <input type="email" name="email" placeholder="you@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
         <button type="submit">Keep me posted →</button>
       </form>
       <div class="fineprint">No spam. We'll only email when there's something to say.</div>
@@ -765,7 +775,7 @@
         btn.style.background = 'var(--neon)';
         btn.style.color = 'var(--bone)';
         input.value = '';
-        input.placeholder = 'see you at the start line';
+        input.placeholder = 'see you out there';
         input.disabled = true;
       } catch (err) {
         btn.textContent = 'Try again';
@@ -820,5 +830,6 @@
   })();
 </script>
 
+<script defer src="assets/trail.js"></script>
 </body>
 </html>
