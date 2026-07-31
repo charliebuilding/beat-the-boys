@@ -102,6 +102,10 @@
     font-family: var(--display);
     font-size: 13px;
     letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-transform: uppercase;
   }
   .topbar-logo img {
     height: 32px;
@@ -154,6 +158,8 @@
   @media (max-width: 720px) {
     .eyebrow { flex-wrap: wrap; row-gap: 8px; margin-bottom: clamp(36px, 6vh, 56px); }
     .title { margin-bottom: clamp(40px, 7vh, 64px); }
+    .hero .countdown { margin-bottom: 28px; }
+    .countdown-label { margin-bottom: 10px; }
   }
   @media (max-width: 480px) {
     .eyebrow-lead, .eyebrow-sep { display: none; }
@@ -517,9 +523,11 @@
     color: var(--rust);
   }
   @media (max-width: 540px) {
-    .countdown-cell { flex: 1 1 50%; border-bottom: 1px solid rgba(255, 61, 35, 0.3); }
-    .countdown-cell:nth-child(2n) { border-right: 0; }
-    .countdown-cell:nth-last-child(-n+2) { border-bottom: 0; }
+    .countdown-cells { max-width: 100%; }
+    .countdown-cell { flex: 1 1 25%; padding: 12px 10px; }
+    .countdown-cell .n { font-size: clamp(20px, 7vw, 28px); }
+    .countdown-cell .u { font-size: 9px; letter-spacing: 0.14em; }
+    .hero-cta { flex: 1 1 100%; justify-content: center; }
   }
 
   /* Scroll reveals (only when JS is running; skipped for reduced motion) */
@@ -612,7 +620,7 @@
   <!-- ========== TOP : RED ZONE ========== -->
   <section class="top">
     <header class="topbar">
-      <div class="topbar-logo"><img src="images/BTB_Submark_Black.png" alt="Beat The Boys" /></div>
+      <div class="topbar-logo"><img src="images/BTB_Submark_Black.png" alt="Beat The Boys" /><span>Home</span></div>
       <nav class="topbar-nav">
         <a href="run-the-wharf.html">Race 01 ↗</a>
         <a href="race-2.html">Race 02 ↗</a>
