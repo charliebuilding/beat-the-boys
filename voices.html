@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Beat The Boys · Voices</title>
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png" />
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+<meta name="description" content="Leave a voice note for Beat The Boys. Pick a question, hit record, and tell us why you run — in your own words." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,400&family=Permanent+Marker&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --rust: #FF3D23;
+    --ink: #0A0A0A;
+    --bone: #F4F1EA;
+    --neon: #FF2D87;
+
+    --display: 'Archivo Black', 'Helvetica Neue', sans-serif;
+    --body: 'Archivo', system-ui, sans-serif;
+    --editorial: 'Fraunces', Georgia, serif;
+    --marker: 'Permanent Marker', cursive;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: var(--body);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--rust); color: var(--ink); }
+
+  .hp { position: absolute; left: -9999px; }
+
+  [hidden] { display: none !important; }
+
+  /* ============ TOPBAR ============ */
+  .topbar {
+    background: var(--ink);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+    position: relative;
+    z-index: 5;
+  }
+  @media (max-width: 720px) { .topbar { padding: 24px; } }
+  .topbar a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity .2s;
+    padding: 12px 4px;
+    margin: 0 -4px;
+    display: inline-block;
+  }
+  .topbar a:hover { opacity: 0.6; }
+  @media (max-width: 480px) {
+    .topbar { font-size: 10px; letter-spacing: 0.14em; }
+    .topbar-logo { font-size: 12px !important; }
+  }
+  .topbar a.topbar-logo {
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topbar-logo img { height: 24px; width: auto; display: block; }
+
+  /* ============ EVENT (INK + RUST) ============ */
+  .event {
+    background: var(--ink);
+    background-image:
+      linear-gradient(to right, rgba(244, 241, 234, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(244, 241, 234, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--bone);
+    padding: 64px 40px 32px;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  @media (max-width: 720px) { .event { padding: 48px 24px 28px; } }
+
+  /* Subtle radial neon glow in the corner */
+  .event::before {
+    content: '';
+    position: absolute;
+    bottom: -30%; right: -10%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, var(--neon) 0%, transparent 65%);
+    opacity: 0.16;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .event-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .event-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--bone);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    opacity: 0.85;
+  }
+  .event-eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--bone); opacity: 0.6;
+  }
+
+  .event-title {
+    font-family: var(--display);
+    font-size: clamp(32px, 8vw, 116px);
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .event-title .line { display: block; }
+  .event-title .line--accent { color: var(--rust); }
+
+  .event-tag {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.5;
+    color: var(--bone);
+    max-width: 600px;
+    margin-bottom: 56px;
+    opacity: 0.9;
+  }
+
+  .event-bottombar {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 61, 35, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+    opacity: 0.7;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .event-bottombar .num {
+    font-family: var(--display);
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--rust);
+    opacity: 1;
+  }
+  .event-bottombar .right {
+    display: flex; gap: 16px; align-items: end;
+  }
+
+  .event-scrawl {
+    position: absolute;
+    top: 32px; right: 5%;
+    font-family: var(--marker);
+    color: var(--neon);
+    text-transform: uppercase;
+    pointer-events: none;
+    line-height: 0.95;
+    font-size: clamp(22px, 2.8vw, 38px);
+    transform: rotate(-7deg);
+    text-align: center;
+    max-width: 200px;
+    z-index: 3;
+  }
+  @media (max-width: 720px) {
+    .event-scrawl { display: none; }
+  }
+
+  /* ============ VOICE CARD ============ */
+  .voice-card {
+    margin: 24px 0 16px;
+    padding: 40px 36px 36px;
+    border: 1.5px solid var(--rust);
+    background: rgba(255, 61, 35, 0.06);
+    position: relative;
+    overflow: hidden;
+    max-width: 760px;
+  }
+  @media (max-width: 720px) { .voice-card { padding: 28px 22px 24px; } }
+
+  .voice-card::before {
+    content: '';
+    position: absolute;
+    top: -40%; right: -20%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, var(--neon) 0%, transparent 65%);
+    opacity: 0.12;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .voice-card > * { position: relative; z-index: 2; }
+
+  .voice-card-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--rust);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .voice-card-eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--rust);
+  }
+
+  .voice-card-headline {
+    font-family: var(--display);
+    font-size: clamp(32px, 4.6vw, 60px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--bone);
+    margin-bottom: 14px;
+  }
+  .voice-card-headline .accent { color: var(--rust); }
+
+  .voice-card-tag {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: clamp(14px, 1.3vw, 16px);
+    line-height: 1.5;
+    color: var(--bone);
+    opacity: 0.85;
+    margin-bottom: 28px;
+    max-width: 520px;
+  }
+
+  /* ============ FORM ============ */
+  .vf-group { margin-bottom: 28px; border: 0; }
+
+  .vf-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--rust);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .prompt-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .prompt-chip { display: block; }
+  .prompt-chip input {
+    position: absolute;
+    opacity: 0;
+    width: 1px; height: 1px;
+  }
+  .prompt-chip span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+    color: var(--bone);
+    border: 1px solid var(--rust);
+    background: transparent;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    max-width: 420px;
+  }
+  .prompt-chip span:hover { border-color: var(--bone); }
+  .prompt-chip input:checked + span {
+    background: var(--rust);
+    color: var(--ink);
+  }
+  .prompt-chip input:focus-visible + span {
+    outline: 2px solid var(--neon);
+    outline-offset: 2px;
+  }
+
+  /* ---- Recorder ---- */
+  .recorder {
+    border: 1.5px solid rgba(244, 241, 234, 0.25);
+    background: var(--ink);
+    padding: 32px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .rec-btn {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 2px solid var(--rust);
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color .2s ease, transform .15s ease;
+    flex-shrink: 0;
+  }
+  .rec-btn:hover { border-color: var(--bone); transform: scale(1.04); }
+  .rec-btn:disabled { opacity: 0.5; cursor: wait; }
+  .rec-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--rust);
+    transition: border-radius .2s ease, background .2s ease;
+  }
+  .recorder[data-state="recording"] .rec-dot {
+    border-radius: 6px;  /* stop square */
+    background: var(--neon);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .recorder[data-state="recording"] .rec-btn {
+      animation: rec-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes rec-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 45, 135, 0.4); }
+      50% { box-shadow: 0 0 0 14px rgba(255, 45, 135, 0); }
+    }
+  }
+
+  .rec-timer {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--bone);
+    font-variant-numeric: tabular-nums;
+  }
+  .rec-timer .rec-timer-max { opacity: 0.4; font-weight: 400; font-size: 16px; }
+
+  .rec-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+    opacity: 0.6;
+    min-height: 1.4em;
+  }
+
+  .rec-playback {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+  .recorder[data-state="recorded"] .rec-playback { display: flex; }
+  .recorder[data-state="recorded"] .rec-btn { display: none; }
+  .rec-playback audio { width: 100%; max-width: 420px; }
+  .rec-again {
+    background: none;
+    border: 1px solid rgba(244, 241, 234, 0.35);
+    color: var(--bone);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .rec-again:hover { border-color: var(--rust); color: var(--rust); }
+
+  .vf-toggle {
+    background: none;
+    border: 0;
+    color: var(--rust);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    margin-top: 14px;
+    padding: 6px 0;
+    display: inline-block;
+  }
+  .vf-toggle:hover { color: var(--bone); }
+
+  .vf-textarea {
+    width: 100%;
+    border: 1.5px solid var(--rust);
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--ink);
+    color: var(--bone);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 16px 18px;
+    outline: none;
+    resize: vertical;
+    transition: box-shadow .25s ease, border-color .25s ease;
+  }
+  .vf-textarea:focus { border-color: var(--bone); box-shadow: 4px 4px 0 var(--rust); }
+  .vf-textarea::placeholder { color: var(--rust); opacity: 0.7; }
+
+  .vf-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .vf-row .vf-input { flex: 1 1 220px; }
+
+  .vf-input {
+    width: 100%;
+    max-width: 340px;
+    border: 1.5px solid var(--rust);
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--ink);
+    color: var(--bone);
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    padding: 16px 18px;
+    outline: none;
+    transition: box-shadow .25s ease, border-color .25s ease;
+  }
+  .vf-input:focus { border-color: var(--bone); box-shadow: 4px 4px 0 var(--rust); }
+  .vf-input::placeholder { color: var(--rust); opacity: 0.7; }
+
+  /* 16px floor stops iOS Safari zooming the page when a field is focused */
+  @media (pointer: coarse) {
+    .vf-input, .vf-textarea { font-size: 16px; }
+  }
+
+  .vf-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--bone);
+    opacity: 0.9;
+    cursor: pointer;
+    max-width: 560px;
+  }
+  .vf-check + .vf-check { margin-top: 14px; }
+  .vf-check input {
+    accent-color: var(--rust);
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .vf-check a { color: var(--rust); }
+  .vf-check a:hover { color: var(--bone); }
+
+  .vf-submit {
+    border: 0;
+    background: var(--rust);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 18px 40px;
+    cursor: pointer;
+    transition: background .25s ease, color .25s ease;
+    width: 100%;
+    max-width: 340px;
+  }
+  .vf-submit:hover { background: var(--bone); color: var(--ink); }
+  .vf-submit:disabled { opacity: 0.6; cursor: wait; }
+
+  .vf-error {
+    display: none;
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--neon);
+  }
+  .vf-error.show { display: block; }
+
+  .vf-fineprint {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--bone);
+    opacity: 0.5;
+  }
+
+  /* ---- Done state ---- */
+  .vf-done { display: none; }
+  .voice-form.is-done .vf-group,
+  .voice-form.is-done .vf-submit,
+  .voice-form.is-done .vf-error,
+  .voice-form.is-done .vf-fineprint { display: none; }
+  .voice-form.is-done .vf-done { display: block; }
+  .vf-done-mark {
+    font-family: var(--marker);
+    color: var(--neon);
+    font-size: clamp(30px, 4vw, 44px);
+    transform: rotate(-3deg);
+    transform-origin: left center;
+    margin-bottom: 18px;
+  }
+  .vf-done p {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.55;
+    max-width: 480px;
+    opacity: 0.9;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/" class="topbar-logo">← <img src="images/BTB_Submark_Bone.png" alt="Beat The Boys" /></a>
+  <a href="https://www.instagram.com/marymccarths?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">@marymccarths ↗</a>
+</header>
+
+<section class="event" aria-labelledby="event-title">
+  <div class="event-scrawl">Say it<br />loud.</div>
+
+  <div class="event-inner">
+    <div class="event-eyebrow">Voices &nbsp;·&nbsp; The BTB Movement</div>
+
+    <h2 class="event-title" id="event-title">
+      <span class="line">Your voice.</span>
+      <span class="line line--accent">Our movement.</span>
+    </h2>
+
+    <p class="event-tag">
+      Beat The Boys is built from the women who show up. Pick a question, hit record, and tell us in your own words. 90 seconds, one take, no polish needed.
+    </p>
+
+    <div class="voice-card">
+      <div class="voice-card-eyebrow">Add your voice</div>
+      <h3 class="voice-card-headline">Say it <span class="accent">loud.</span></h3>
+      <p class="voice-card-tag">
+        Your story goes straight to the BTB team. Tick the share box if you're happy for us to play it out loud — otherwise it stays between us.
+      </p>
+
+      <form class="voice-form" name="voice-notes" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data" novalidate>
+        <input type="hidden" name="form-name" value="voice-notes" />
+        <input type="hidden" name="mode" value="audio" />
+        <p class="hp" aria-hidden="true"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+        <fieldset class="vf-group">
+          <legend class="vf-label">01 · Pick your question</legend>
+          <div class="prompt-chips">
+            <label class="prompt-chip">
+              <input type="radio" name="prompt" value="As a woman, why do you want to be part of the BTB movement?" required />
+              <span>As a woman, why do you want to be part of the BTB movement?</span>
+            </label>
+            <label class="prompt-chip">
+              <input type="radio" name="prompt" value="As a woman, when has sport made you feel small — and what did you do next?" />
+              <span>As a woman, when has sport made you feel small — and what did you do next?</span>
+            </label>
+            <label class="prompt-chip">
+              <input type="radio" name="prompt" value="What does beating the boys mean to you, as a woman who races?" />
+              <span>What does beating the boys mean to you, as a woman who races?</span>
+            </label>
+            <label class="prompt-chip">
+              <input type="radio" name="prompt" value="Who's the woman who got you to the start line?" />
+              <span>Who's the woman who got you to the start line?</span>
+            </label>
+            <label class="prompt-chip">
+              <input type="radio" name="prompt" value="What would you tell the girl who thinks racing isn't for her?" />
+              <span>What would you tell the girl who thinks racing isn't for her?</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Netlify's build-time parser needs to see this file input so the
+             voice-note file field is registered on the form. Users never touch
+             it — JS swaps the recorded blob into its FormData slot. -->
+        <input type="file" name="voice-note" accept="audio/*" class="hp" tabindex="-1" aria-hidden="true" />
+
+        <div class="vf-group">
+          <div class="vf-label" id="record-label">02 · Say it — or write it</div>
+
+          <div class="recorder" data-state="idle" aria-labelledby="record-label">
+            <button type="button" class="rec-btn" aria-label="Start recording">
+              <span class="rec-dot"></span>
+            </button>
+            <div class="rec-timer"><span class="rec-timer-now">00:00</span> <span class="rec-timer-max">/ 01:30</span></div>
+            <div class="rec-status" role="status" aria-live="polite">Tap to record · 90 seconds max</div>
+            <div class="rec-playback">
+              <audio controls></audio>
+              <button type="button" class="rec-again">↺ Go again</button>
+            </div>
+          </div>
+
+          <textarea class="vf-textarea" name="written-note" rows="6" placeholder="Go on then — say it in writing." hidden></textarea>
+
+          <button type="button" class="vf-toggle" aria-pressed="false">Prefer to write it? →</button>
+        </div>
+
+        <div class="vf-group">
+          <label class="vf-label" for="first-name">03 · Sign it (optional)</label>
+          <div class="vf-row">
+            <input class="vf-input" id="first-name" type="text" name="first-name" autocomplete="given-name" placeholder="First name" />
+            <input class="vf-input" id="instagram" type="text" name="instagram" autocomplete="off" autocapitalize="none" placeholder="@yourhandle" aria-label="Instagram handle" />
+          </div>
+        </div>
+
+        <div class="vf-group">
+          <div class="vf-label">04 · The small print</div>
+          <label class="vf-check">
+            <input type="checkbox" name="consent-share" value="yes" />
+            <span>I'm happy for BTB to share this publicly — on socials, the site, race day. Leave it unticked and it stays with the team.</span>
+          </label>
+          <label class="vf-check">
+            <input type="checkbox" name="consent-processing" value="yes" required />
+            <span>I'm okay with BTB storing this recording and my details as described in the <a href="privacy.html">privacy policy</a>.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="vf-submit">Send it →</button>
+        <div class="vf-error" role="alert"></div>
+        <div class="vf-fineprint">Voice notes go straight to the BTB team. Shared publicly only if you tick the box.</div>
+
+        <div class="vf-done">
+          <div class="vf-done-mark">Heard ✓</div>
+          <p>That's in the mix. Thank you — every voice makes this thing louder. See you at the start line.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="event-bottombar">
+      <div>Beat The Boys × Voices × The Movement</div>
+      <div class="right">
+        <span>#beattheboys</span>
+        <span class="num">03</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const form = document.querySelector('.voice-form');
+    const recorderEl = form.querySelector('.recorder');
+    const recBtn = form.querySelector('.rec-btn');
+    const recAgainBtn = form.querySelector('.rec-again');
+    const timerNow = form.querySelector('.rec-timer-now');
+    const statusEl = form.querySelector('.rec-status');
+    const audioEl = form.querySelector('.rec-playback audio');
+    const toggleBtn = form.querySelector('.vf-toggle');
+    const textarea = form.querySelector('.vf-textarea');
+    const modeInput = form.querySelector('input[name="mode"]');
+    const submitBtn = form.querySelector('.vf-submit');
+    const errorEl = form.querySelector('.vf-error');
+
+    const MAX_MS = 90000;
+    const MAX_BYTES = 7.5 * 1024 * 1024; // Netlify caps uploads at 8MB/file
+
+    let mode = 'audio';
+    let blob = null;
+    let objectUrl = null;
+    let mediaRecorder = null;
+    let chunks = [];
+    let timerId = null;
+    let startedAt = 0;
+
+    // Safari records audio/mp4; Chrome/Firefox webm/opus.
+    const CANDIDATES = [
+      'audio/webm;codecs=opus',
+      'audio/webm',
+      'audio/mp4;codecs=mp4a.40.2',
+      'audio/mp4',
+      'audio/ogg;codecs=opus'
+    ];
+    const canRecord = 'MediaRecorder' in window && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    const mimeChoice = canRecord && MediaRecorder.isTypeSupported
+      ? (CANDIDATES.find((t) => MediaRecorder.isTypeSupported(t)) || '')
+      : '';
+
+    const setState = (s) => { recorderEl.dataset.state = s; };
+    const setStatus = (msg) => { statusEl.textContent = msg; };
+
+    const shake = (el) => el.animate(
+      [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
+      { duration: 250 }
+    );
+
+    const showError = (msg) => { errorEl.textContent = msg; errorEl.classList.add('show'); shake(form); };
+    const clearError = () => { errorEl.textContent = ''; errorEl.classList.remove('show'); };
+
+    const fmt = (ms) => {
+      const s = Math.floor(ms / 1000);
+      return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+    };
+
+    const discardTake = () => {
+      blob = null;
+      if (objectUrl) { URL.revokeObjectURL(objectUrl); objectUrl = null; }
+      audioEl.removeAttribute('src');
+      timerNow.textContent = '00:00';
+    };
+
+    const setMode = (m) => {
+      mode = m;
+      modeInput.value = m;
+      const isText = m === 'text';
+      recorderEl.hidden = isText;
+      textarea.hidden = !isText;
+      toggleBtn.setAttribute('aria-pressed', String(isText));
+      toggleBtn.textContent = isText ? "Actually, I'll say it →" : 'Prefer to write it? →';
+      clearError();
+      if (isText) textarea.focus();
+    };
+
+    // --- Recording ---
+    const stopTimer = () => { if (timerId) { clearInterval(timerId); timerId = null; } };
+
+    const startRecording = async () => {
+      clearError();
+      setState('requesting');
+      setStatus('Allow mic access…');
+      recBtn.disabled = true;
+      let stream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch (err) {
+        setState('idle');
+        recBtn.disabled = false;
+        setStatus('No mic? No problem — write it instead.');
+        setMode('text');
+        return;
+      }
+
+      try {
+        mediaRecorder = mimeChoice ? new MediaRecorder(stream, { mimeType: mimeChoice }) : new MediaRecorder(stream);
+      } catch (err) {
+        mediaRecorder = new MediaRecorder(stream);
+      }
+      chunks = [];
+      mediaRecorder.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+      mediaRecorder.onstop = () => {
+        stream.getTracks().forEach((t) => t.stop());
+        stopTimer();
+        const type = mediaRecorder.mimeType || mimeChoice || 'audio/webm';
+        blob = new Blob(chunks, { type });
+        if (!blob.size) {
+          setState('idle');
+          setStatus('Nothing recorded — give it another go.');
+          discardTake();
+          return;
+        }
+        if (blob.size > MAX_BYTES) {
+          setState('idle');
+          setStatus('That take was too big — try a shorter one.');
+          discardTake();
+          return;
+        }
+        objectUrl = URL.createObjectURL(blob);
+        audioEl.src = objectUrl;
+        setState('recorded');
+        setStatus('Happy with it? Send it below — or go again.');
+      };
+
+      mediaRecorder.start(1000); // timeslice so Safari flushes chunks
+      startedAt = Date.now();
+      recBtn.disabled = false;
+      recBtn.setAttribute('aria-label', 'Stop recording');
+      setState('recording');
+      setStatus('Recording… tap to stop');
+      timerId = setInterval(() => {
+        const elapsed = Date.now() - startedAt;
+        timerNow.textContent = fmt(Math.min(elapsed, MAX_MS));
+        if (elapsed >= MAX_MS && mediaRecorder && mediaRecorder.state === 'recording') {
+          mediaRecorder.stop();
+        }
+      }, 200);
+    };
+
+    const stopRecording = () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+      recBtn.setAttribute('aria-label', 'Start recording');
+    };
+
+    recBtn.addEventListener('click', () => {
+      const s = recorderEl.dataset.state;
+      if (s === 'idle') startRecording();
+      else if (s === 'recording') stopRecording();
+    });
+
+    recAgainBtn.addEventListener('click', () => {
+      discardTake();
+      setState('idle');
+      setStatus('Tap to record · 90 seconds max');
+    });
+
+    toggleBtn.addEventListener('click', () => setMode(mode === 'audio' ? 'text' : 'audio'));
+
+    if (!canRecord) {
+      setStatus('');
+      setMode('text');
+      toggleBtn.hidden = true;
+      textarea.placeholder = "Voice recording isn't supported in this browser — write it instead.";
+    }
+
+    // --- Submit ---
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError();
+
+      const prompt = form.querySelector('input[name="prompt"]:checked');
+      if (!prompt) { showError('Pick a question first.'); return; }
+
+      if (mode === 'audio' && !blob) {
+        showError('Record your note first — or switch to writing it.');
+        return;
+      }
+      if (mode === 'text' && !textarea.value.trim()) {
+        showError('Write your note first — or switch to recording it.');
+        textarea.focus();
+        return;
+      }
+      if (!form.querySelector('input[name="consent-processing"]').checked) {
+        showError('Tick the privacy box so we can keep your note.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      try {
+        const type = (blob && blob.type) || '';
+        const ext = type.includes('mp4') ? 'm4a' : type.includes('ogg') ? 'ogg' : 'webm';
+        const fd = new FormData(form);
+        if (mode === 'audio') {
+          fd.set('voice-note', blob, 'btb-voice-note.' + ext);
+          fd.delete('written-note');
+        } else {
+          fd.delete('voice-note');
+        }
+        fd.set('mode', mode);
+        // No Content-Type header — the browser sets multipart/form-data with the boundary.
+        const res = await fetch('/', { method: 'POST', body: fd });
+        if (!res.ok) throw new Error('submit failed');
+        form.classList.add('is-done');
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Try again →';
+        shake(form);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
