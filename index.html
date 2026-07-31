@@ -169,7 +169,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .title-logo, .eyebrow, .hero .countdown, .hero-ctas, .signup {
+    .title-logo, .eyebrow, .hero-ctas, .signup {
       animation: none; opacity: 1; transform: none;
     }
   }
@@ -181,7 +181,7 @@
     align-self: flex-start;
     margin-bottom: 36px;
     opacity: 0;
-    animation: fadeUp .8s .65s ease forwards;
+    animation: fadeUp .8s .5s ease forwards;
   }
   .hero-cta {
     display: inline-flex;
@@ -458,17 +458,6 @@
 
   /* Race-day countdown */
   .countdown { margin: 0 0 36px; }
-  .hero .countdown {
-    margin: 0 0 clamp(36px, 5vh, 56px);
-    opacity: 0;
-    animation: fadeUp .8s .5s ease forwards;
-  }
-  .hero .countdown-label { color: var(--ink); }
-  .hero .countdown-cells { border-color: rgba(10, 10, 10, 0.4); background: transparent; }
-  .hero .countdown-cell { border-color: rgba(10, 10, 10, 0.4); }
-  .hero .countdown-cell .n,
-  .hero .countdown-cell .u,
-  .hero .countdown-over { color: var(--ink); }
   .countdown-label {
     font-family: var(--mono);
     font-size: 10px;
@@ -628,16 +617,6 @@
         <img class="title-logo" src="images/BTB_Wordmark_Black.png" alt="Beat The Boys" />
       </h1>
 
-      <div class="countdown" aria-label="Countdown to race day">
-        <span class="countdown-label">Race day in</span>
-        <div class="countdown-cells">
-          <div class="countdown-cell"><span class="n" data-unit="days">--</span><span class="u">Days</span></div>
-          <div class="countdown-cell"><span class="n" data-unit="hours">--</span><span class="u">Hrs</span></div>
-          <div class="countdown-cell"><span class="n" data-unit="mins">--</span><span class="u">Min</span></div>
-          <div class="countdown-cell"><span class="n" data-unit="secs">--</span><span class="u">Sec</span></div>
-        </div>
-      </div>
-
       <div class="hero-ctas">
         <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" class="hero-cta" target="_blank" rel="noopener">Get Tickets →</a>
         <a href="run-the-wharf.html" class="hero-cta hero-cta--ghost">Race 1 · London →</a>
@@ -701,6 +680,16 @@
       <div class="race-stat"><span class="k">Distance</span><span class="v">5K</span></div>
       <div class="race-stat"><span class="k">When</span><span class="v">Dusk to dark</span></div>
       <div class="race-stat"><span class="k">Location</span><span class="v">Canary Wharf</span></div>
+    </div>
+
+    <div class="countdown" aria-label="Countdown to race day">
+      <span class="countdown-label">Race day in</span>
+      <div class="countdown-cells">
+        <div class="countdown-cell"><span class="n" data-unit="days">--</span><span class="u">Days</span></div>
+        <div class="countdown-cell"><span class="n" data-unit="hours">--</span><span class="u">Hrs</span></div>
+        <div class="countdown-cell"><span class="n" data-unit="mins">--</span><span class="u">Min</span></div>
+        <div class="countdown-cell"><span class="n" data-unit="secs">--</span><span class="u">Sec</span></div>
+      </div>
     </div>
 
     <div class="btn-row">
@@ -830,6 +819,5 @@
   })();
 </script>
 
-<script defer src="assets/trail.js"></script>
 </body>
 </html>
