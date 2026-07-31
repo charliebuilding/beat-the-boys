@@ -92,6 +92,14 @@
     font-size: 13px;
     letter-spacing: 0.04em;
   }
+  .topbar-logo img {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+  @media (max-width: 480px) {
+    .topbar-logo img { height: 26px; }
+  }
 
   .hero {
     display: flex;
@@ -128,25 +136,19 @@
   .eyebrow a:hover { opacity: 0.6; }
 
   .title {
-    font-family: var(--display);
-    font-size: clamp(52px, 13vw, 200px);
-    line-height: 0.85;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    text-transform: uppercase;
     margin-bottom: 28px;
   }
-  .title .line {
+  .title-logo {
     display: block;
+    width: min(100%, 1000px);
+    height: auto;
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeUp .9s ease forwards, breathe 5s ease-in-out 1.5s infinite;
+    animation: fadeUp .9s .25s ease forwards, breathe 5s ease-in-out 1.5s infinite;
   }
-  .title .line:nth-child(1) { animation-delay: .25s, 1.5s; }
-  .title .line:nth-child(2) { animation-delay: .4s, 1.65s; }
 
   @media (prefers-reduced-motion: reduce) {
-    .title .line { animation: none; opacity: 1; transform: none; }
+    .title-logo { animation: none; opacity: 1; transform: none; }
   }
 
   .scrawl {
@@ -408,6 +410,13 @@
   }
   .signoff-x { display: inline-block; margin-left: 6px; transform: rotate(8deg); }
 
+  .racing-mark {
+    display: block;
+    width: min(70%, 360px);
+    height: auto;
+    margin-top: 44px;
+  }
+
   /* Race feature stats */
   .race-stats {
     display: flex;
@@ -495,6 +504,8 @@
   .site-footer .right { display: flex; gap: 16px; align-items: end; }
   .site-footer a { color: inherit; text-decoration: none; transition: opacity .2s; }
   .site-footer a:hover { opacity: 0.6; }
+  .site-footer .footer-brand { display: flex; align-items: center; gap: 12px; }
+  .site-footer .footer-brand img { height: 20px; width: auto; display: block; }
 
   @keyframes fade { to { opacity: 1; } }
   @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
@@ -511,7 +522,7 @@
   <!-- ========== TOP : RED ZONE ========== -->
   <section class="top">
     <header class="topbar">
-      <div class="topbar-logo">Beat The Boys</div>
+      <div class="topbar-logo"><img src="images/BTB_Submark_Black.png" alt="Beat The Boys" /></div>
       <nav class="topbar-nav">
         <a href="run-the-wharf.html">Race 01 ↗</a>
         <a href="race-2.html">Race 02 ↗</a>
@@ -524,8 +535,7 @@
       <div class="eyebrow">A Global Race Series &nbsp;·&nbsp; <a href="run-the-wharf.html">Race 1 · London</a> &nbsp;·&nbsp; <a href="race-2.html">Race 2 · 2027</a></div>
 
       <h1 class="title">
-        <span class="line">Beat</span>
-        <span class="line">The Boys.</span>
+        <img class="title-logo" src="images/BTB_Wordmark_Black.png" alt="Beat The Boys" />
       </h1>
 
       <div class="hero-ctas">
@@ -577,6 +587,7 @@
       Every race is a closed-road, full-send night out. A squad in matching bibs, a real start line, real results, and a party at the finish. We'll tell you exactly how many boys you beat. Then we go again.
     </p>
     <p class="signoff">by Mary McCarths <span class="signoff-x">x</span></p>
+    <img class="racing-mark" src="images/BTB_Racing_Rust.png" alt="Beat The Boys Racing" />
   </div>
 </section>
 
@@ -631,7 +642,7 @@
 
 <!-- ========== FOOTER ========== -->
 <footer class="site-footer">
-  <div>© Beat The Boys 2026 · Run Social Ltd</div>
+  <div class="footer-brand"><img src="images/BTB_Submark_Rust.png" alt="" /><span>© Beat The Boys 2026 · Run Social Ltd</span></div>
   <div class="right">
     <a href="privacy.html">Privacy</a>
     <a href="https://www.instagram.com/marymccarths?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">#beattheboys</a>
