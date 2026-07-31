@@ -121,7 +121,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 22px;
+    margin-bottom: clamp(36px, 5vh, 56px);
     opacity: 0;
     animation: fade .8s .15s ease forwards;
   }
@@ -459,6 +459,74 @@
     .race-stat:nth-last-child(-n+2) { border-bottom: 0; }
   }
 
+  /* Race-day countdown */
+  .countdown { margin: 0 0 36px; }
+  .countdown-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .countdown-cells {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border: 1px solid rgba(255, 61, 35, 0.3);
+    max-width: 480px;
+  }
+  .countdown-cell {
+    flex: 1 1 90px;
+    padding: 18px 22px;
+    border-right: 1px solid rgba(255, 61, 35, 0.3);
+    text-align: left;
+  }
+  .countdown-cell:last-child { border-right: 0; }
+  .countdown-cell .n {
+    font-family: var(--display);
+    font-size: clamp(26px, 3.2vw, 40px);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+    color: var(--bone);
+    line-height: 1;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .countdown-cell .u {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--bone);
+    opacity: 0.55;
+  }
+  .countdown-over {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.4vw, 30px);
+    text-transform: uppercase;
+    color: var(--rust);
+  }
+  @media (max-width: 540px) {
+    .countdown-cell { flex: 1 1 50%; border-bottom: 1px solid rgba(255, 61, 35, 0.3); }
+    .countdown-cell:nth-child(2n) { border-right: 0; }
+    .countdown-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  }
+
+  /* Scroll reveals (only when JS is running; skipped for reduced motion) */
+  @media (prefers-reduced-motion: no-preference) {
+    .js-reveal .section-inner {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .js-reveal .section-inner.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
   .btn {
     display: inline-flex;
@@ -615,6 +683,16 @@
       <div class="race-stat"><span class="k">Location</span><span class="v">Canary Wharf</span></div>
     </div>
 
+    <div class="countdown" aria-label="Countdown to race day">
+      <span class="countdown-label">Race day in</span>
+      <div class="countdown-cells">
+        <div class="countdown-cell"><span class="n" data-unit="days">--</span><span class="u">Days</span></div>
+        <div class="countdown-cell"><span class="n" data-unit="hours">--</span><span class="u">Hrs</span></div>
+        <div class="countdown-cell"><span class="n" data-unit="mins">--</span><span class="u">Min</span></div>
+        <div class="countdown-cell"><span class="n" data-unit="secs">--</span><span class="u">Sec</span></div>
+      </div>
+    </div>
+
     <div class="btn-row">
       <a href="https://www.letsdothis.com/gb/o/171180/checkout/ticket?eventId=248572&amp;utm_source=reserved_entry&amp;occurrenceId=21111161678&amp;reservationCode=re_s5wemku06i5l" class="btn btn--primary" target="_blank" rel="noopener">Get Tickets →</a>
       <a href="run-the-wharf.html" class="btn btn--ghost">Full race details →</a>
@@ -695,6 +773,51 @@
       }
     });
   });
+
+  // Race-day countdown
+  (() => {
+    const el = document.querySelector('.countdown');
+    if (!el) return;
+    const target = new Date('2026-09-03T18:00:00+01:00').getTime();
+    const spans = {
+      days: el.querySelector('[data-unit="days"]'),
+      hours: el.querySelector('[data-unit="hours"]'),
+      mins: el.querySelector('[data-unit="mins"]'),
+      secs: el.querySelector('[data-unit="secs"]')
+    };
+    const pad = (n) => String(n).padStart(2, '0');
+    let timer;
+    const tick = () => {
+      const left = target - Date.now();
+      if (left <= 0) {
+        el.innerHTML = '<div class="countdown-over">Race day. See you at the start line.</div>';
+        if (timer) clearInterval(timer);
+        return;
+      }
+      spans.days.textContent = pad(Math.floor(left / 86400000));
+      spans.hours.textContent = pad(Math.floor(left / 3600000) % 24);
+      spans.mins.textContent = pad(Math.floor(left / 60000) % 60);
+      spans.secs.textContent = pad(Math.floor(left / 1000) % 60);
+    };
+    tick();
+    timer = setInterval(tick, 1000);
+  })();
+
+  // Scroll-reveal sections
+  (() => {
+    const targets = document.querySelectorAll('.section-inner');
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+    document.documentElement.classList.add('js-reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach((t) => io.observe(t));
+  })();
 </script>
 
 </body>
