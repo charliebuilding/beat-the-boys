@@ -60,7 +60,8 @@
     text-decoration: none;
     border-bottom: 0;
     transition: opacity .2s;
-    padding: 8px 0;
+    padding: 12px 4px;
+    margin: 0 -4px;
     display: inline-block;
   }
   .topbar a:hover { opacity: 0.6; }
@@ -108,7 +109,7 @@
 
   .privacy-title {
     font-family: var(--display);
-    font-size: clamp(48px, 8vw, 96px);
+    font-size: clamp(40px, 12vw, 96px);
     line-height: 0.88;
     letter-spacing: -0.025em;
     color: var(--bone);
@@ -204,6 +205,8 @@
     text-decoration: none;
     border-bottom: 0;
     transition: opacity .2s;
+    padding: 12px 4px;
+    margin: -12px -4px;
   }
   .site-footer a:hover { opacity: 0.6; }
   .site-footer .right { display: flex; gap: 16px; align-items: end; }
@@ -303,5 +306,6 @@
   </div>
 </footer>
 
+<script defer src="assets/trail.js"></script>
 </body>
 </html>

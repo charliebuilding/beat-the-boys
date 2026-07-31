@@ -61,7 +61,8 @@
     color: inherit;
     text-decoration: none;
     transition: opacity .2s;
-    padding: 8px 0;
+    padding: 12px 4px;
+    margin: 0 -4px;
     display: inline-block;
   }
   .topbar a:hover { opacity: 0.6; }
@@ -166,6 +167,7 @@
     width: auto;
     height: clamp(18px, 2.2vw, 28px);
     max-width: 70%;
+    object-fit: contain;
   }
   .event-credit-ig {
     font-family: var(--mono);
@@ -174,7 +176,7 @@
     letter-spacing: 0.18em;
     color: var(--bone);
     text-decoration: none;
-    padding: 9px 16px;
+    padding: 12px 16px;
     border: 1px solid rgba(244, 241, 234, 0.3);
     margin-left: auto;
     transition: background .2s, color .2s, border-color .2s;
@@ -431,6 +433,8 @@
     color: inherit;
     text-decoration: none;
     transition: opacity .2s;
+    padding: 12px 4px;
+    margin: -12px -4px;
   }
   .event-bottombar a:hover { opacity: 0.6; }
 
@@ -476,7 +480,8 @@
       scrollbar-width: none;
     }
     .gallery-track::-webkit-scrollbar { display: none; }
-    .gallery-slide { scroll-snap-align: start; }
+    .gallery-slide { scroll-snap-align: start; max-width: calc(100vw - 48px); }
+    .gallery-slide img { width: 100%; height: 100%; object-fit: cover; }
   }
 
   .gallery-slide {
@@ -612,6 +617,9 @@
   .wharf-form input[type="email"] {
     flex: 1;
     border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
     padding: 18px 20px;
     font-family: var(--mono);
     font-size: 14px;
@@ -711,6 +719,12 @@
     padding: 0 20px;
   }
   .wharf-signup--secondary .wharf-fineprint { margin-top: 10px; opacity: 0.4; }
+
+  /* 16px floor stops iOS Safari zooming the page when the field is focused */
+  @media (pointer: coarse) {
+    .wharf-form input[type="email"],
+    .wharf-signup--secondary .wharf-form input[type="email"] { font-size: 16px; }
+  }
 </style>
 </head>
 <body>
@@ -811,7 +825,7 @@
       <form class="wharf-form" name="wharf-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="wharf-signup" />
         <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-        <input type="email" name="email" placeholder="your.email@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
+        <input type="email" name="email" placeholder="you@anywhere.com" aria-label="Email" inputmode="email" autocomplete="email" required />
         <button type="submit">Join the squad →</button>
       </form>
       <div class="wharf-fineprint">No spam. Race-day briefings only.</div>
@@ -950,7 +964,7 @@
         btn.style.background = 'var(--neon)';
         btn.style.color = 'var(--bone)';
         input.value = '';
-        input.placeholder = 'see you at the start line';
+        input.placeholder = 'see you out there';
         input.disabled = true;
       } catch (err) {
         btn.textContent = 'Try again';
@@ -960,5 +974,6 @@
   });
 </script>
 
+<script defer src="assets/trail.js"></script>
 </body>
 </html>
